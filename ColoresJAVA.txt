@@ -1,0 +1,11 @@
+color azul
+.setBackground(new Color(133,156,206));
+
+color fondo gris
+.setBackground(new Color(247,247,247));
+
+color verde
+.setBackground(new Color(51,204,51));
+
+color para borrar
+.setBackground(new Color(243,106,54));
