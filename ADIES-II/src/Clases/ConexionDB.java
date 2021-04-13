@@ -15,20 +15,14 @@ import javax.swing.JOptionPane;
 
 public class ConexionDB {
     
-    public String url="jdbc:sqlite:‪C://ADIES.db";
-    
+    public String url="jdbc:sqlite:C://Repositorio//ADIES-II//BD//ADIES.db";
     Connection connect;
     ResultSet result = null;
-    
-    
     public void conectar(){
         try {
             connect = DriverManager.getConnection(url);
-            if (connect != null){
-                JOptionPane.showMessageDialog(null, "Conectado");
-            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No Conectado" + e.toString());
+            JOptionPane.showMessageDialog(null, "No Conectado el Error es: " + e.toString());
             //System.out.println(e.toString());
         }   
     }
@@ -38,6 +32,7 @@ public class ConexionDB {
             PreparedStatement st = connect.prepareStatement(sql);
             st.execute();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No Conectado el Error es: " + e.toString());
             //System.out.println(e.toString());
         }
     }
@@ -47,6 +42,7 @@ public class ConexionDB {
             PreparedStatement st = connect.prepareStatement(sql);
             result = st.executeQuery();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No Conectado el Error es: " + e.toString());
             //System.out.println(e.toString());
         }
         return result;
@@ -56,6 +52,7 @@ public class ConexionDB {
         try {
             connect.close();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No Conectado el Error es: " + e.toString());
            // System.out.println(e.toString());
         }
     }

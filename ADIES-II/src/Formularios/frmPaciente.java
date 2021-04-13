@@ -10,6 +10,7 @@ import Clases.cFechayHora;
 
 import Clases.ConexionDB;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,6 +44,7 @@ public class frmPaciente extends javax.swing.JFrame {
                 id_px = result.getInt(1);
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "el error: "+e.toString());
             //System.out.println(e.toString());
         }
         cc.cerrar();
@@ -442,13 +444,12 @@ public class frmPaciente extends javax.swing.JFrame {
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
-      /*
-        String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +","+ txtnombrespx.getText() +","+ txtapellidospx.getText() +","+ txtdireccionpx.getText() +","+ txtcelularpx.getText() +","+ txtcorreopx.getText() +","+ cboxestadocivil.getSelectedItem() +","+ cboxsexo.getSelectedItem() +","+ cboxtsangre.getSelectedItem() +","+ txtpais.getText() +","+ txtfnacimiento.getText() +","+ txtanotaciones.getText() +","+ lblfecha.getText() +"')";
+       String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +","+ txtnombrespx.getText() +","+ txtapellidospx.getText() +","+ txtdireccionpx.getText() +","+ txtcelularpx.getText() +","+ txtcorreopx.getText() +","+ cboxestadocivil.getSelectedItem() +","+ cboxsexo.getSelectedItem() +","+ cboxtsangre.getSelectedItem() +","+ txtpais.getText() +","+ txtfnacimiento.getText() +","+ txtanotaciones.getText() +","+ lblfecha.getText() +"')";
        cc.conectar();
        cc.insertar(sql_insert);
        cc.cerrar();
        limpiar();
-        */
+       
     }//GEN-LAST:event_pguardarMouseClicked
 
     /**
