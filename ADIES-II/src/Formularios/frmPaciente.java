@@ -32,12 +32,10 @@ public class frmPaciente extends javax.swing.JFrame {
     ConexionDB cc = new ConexionDB();
     
     public int auto_increment(){
-             
-        
         String sql_sel = "select max(ID_PX) from Pacientes";
         ResultSet result = null;
         cc.conectar();
-        cc.seleccionar(sql_sel);
+        result = cc.seleccionar(sql_sel);
         int id_px=0;
         try {
             while (result.next()){
@@ -444,8 +442,8 @@ public class frmPaciente extends javax.swing.JFrame {
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
-       String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +","+ txtnombrespx.getText() +","+ txtapellidospx.getText() +","+ txtdireccionpx.getText() +","+ txtcelularpx.getText() +","+ txtcorreopx.getText() +","+ cboxestadocivil.getSelectedItem() +","+ cboxsexo.getSelectedItem() +","+ cboxtsangre.getSelectedItem() +","+ txtpais.getText() +","+ txtfnacimiento.getText() +","+ txtanotaciones.getText() +","+ lblfecha.getText() +"')";
        cc.conectar();
+       String sql_insert="insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +"','"+ txtnombrespx.getText() +"','"+ txtapellidospx.getText() +"','"+ txtdireccionpx.getText() +"','"+ txtcelularpx.getText() +"','"+ txtcorreopx.getText() +"','"+ cboxestadocivil.getSelectedItem() +"','"+ cboxsexo.getSelectedItem() +"','"+ cboxtsangre.getSelectedItem() +"','"+ txtpais.getText() +"','"+ txtfnacimiento.getText() +"','"+ txtanotaciones.getText() +"','"+ lblfecha.getText() +"')";
        cc.insertar(sql_insert);
        cc.cerrar();
        limpiar();
