@@ -24,10 +24,10 @@ public class frmPaciente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.lblfecha.setText(cFechayHora.fecha());
-        /*txtidpaciente.setText(String.valueOf(auto_increment()));*/
+        txtidpaciente.setText(String.valueOf(auto_increment()));
     }
     
-    /*
+    
     ConexionDB cc = new ConexionDB();
     
     public int auto_increment(){
@@ -48,10 +48,10 @@ public class frmPaciente extends javax.swing.JFrame {
         cc.cerrar();
         return ((id_px)+1);
     }
-    */
+    
     
     public void limpiar(){
-       // txtidpaciente.setText(String.valueOf(auto_increment()));
+        txtidpaciente.setText(String.valueOf(auto_increment()));
         txtdnipx.setText("");
         txtnombrespx.setText("");
         txtapellidospx.setText("");
