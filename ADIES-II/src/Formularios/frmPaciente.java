@@ -6,6 +6,10 @@
 package Formularios;
 
 import java.awt.Color;
+import Clases.cFechayHora;
+
+import Clases.ConexionDB;
+import java.sql.ResultSet;
 
 /**
  *
@@ -19,6 +23,40 @@ public class frmPaciente extends javax.swing.JFrame {
     public frmPaciente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.lblfecha.setText(cFechayHora.fecha());
+        txtidpaciente.setText(String.valueOf(auto_increment()));
+    }
+    
+    ConexionDB cc = new ConexionDB();
+    
+    public int auto_increment(){
+        String sql_sel = "select max(ID_PX) from Pacientes";
+        ResultSet result = null;
+        cc.conectar();
+        cc.seleccionar(sql_sel);
+        int id_px=0;
+        try {
+            while (result.next()){
+                id_px = result.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        cc.cerrar();
+        return ((id_px)+1);
+    }
+    
+    public void limpiar(){
+        txtidpaciente.setText(String.valueOf(auto_increment()));
+        txtdnipx.setText("");
+        txtnombrespx.setText("");
+        txtapellidospx.setText("");
+        txtdireccionpx.setText("");
+        txtcelularpx.setText("");
+        txtcorreopx.setText("");
+        txtpais.setText("");
+        txtfnacimiento.setText("");
+        txtanotaciones.setText("");
     }
 
     /**
@@ -41,32 +79,32 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtidpaciente = new javax.swing.JTextField();
+        txtnombrespx = new javax.swing.JTextField();
+        txtapellidospx = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtdireccionpx = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtcorreopx = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboxestadocivil = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cboxsexo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lblfecha = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtpais = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txtfnacimiento = new javax.swing.JFormattedTextField();
         jLabel15 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cboxtsangre = new javax.swing.JComboBox<>();
+        txtcelularpx = new javax.swing.JFormattedTextField();
+        txtdnipx = new javax.swing.JFormattedTextField();
         pdatosclinicos = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtanotaciones = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
         pguardar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -142,96 +180,108 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel5.setText("Apellidos");
         pdatos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(393, 92, -1, -1));
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtidpaciente.setEditable(false);
+        txtidpaciente.setBackground(new java.awt.Color(247, 247, 247));
+        txtidpaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtidpaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtidpacienteActionPerformed(evt);
             }
         });
-        pdatos.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 30, 210, -1));
+        pdatos.add(txtidpaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 30, 210, -1));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 60, 209, -1));
+        txtnombrespx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtnombrespx, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 89, 300, -1));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 89, 300, -1));
-
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 89, 290, -1));
+        txtapellidospx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtapellidospx, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 89, 290, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Dirección");
         pdatos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 126, -1, -1));
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtdireccionpx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtdireccionpx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtdireccionpxActionPerformed(evt);
             }
         });
-        pdatos.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 123, 660, -1));
+        pdatos.add(txtdireccionpx, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 123, 660, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Celular");
         pdatos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 160, -1, -1));
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 157, 160, -1));
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Correo");
         pdatos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, -1, -1));
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 157, 440, -1));
+        txtcorreopx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtcorreopx, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 157, 440, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Estado Civil");
         pdatos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 194, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado(a)", "Divorciado(a)", "Soltero(a)", "Union Libre", "Viudo(a)" }));
-        pdatos.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 191, 145, -1));
+        cboxestadocivil.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cboxestadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado(a)", "Divorciado(a)", "Soltero(a)", "Union Libre", "Viudo(a)" }));
+        pdatos.add(cboxestadocivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 191, 145, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Sexo");
         pdatos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 194, -1, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
-        pdatos.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 191, 179, -1));
+        cboxsexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cboxsexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
+        pdatos.add(cboxsexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 191, 179, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Fecha");
         pdatos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 33, 53, -1));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("04/04/2021");
-        pdatos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(519, 33, 105, -1));
+        lblfecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblfecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfecha.setText("04/04/2021");
+        pdatos.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(519, 33, 105, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("País de Nacimiento");
         pdatos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 235, -1, -1));
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 232, 241, -1));
+        txtpais.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtpais, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 232, 241, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Fecha de Nacimiento");
         pdatos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 235, -1, -1));
 
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 232, 210, -1));
+        txtfnacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-yyyy"))));
+        txtfnacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtfnacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 232, 210, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Tipo de Sangre");
         pdatos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 194, 100, -1));
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A +", "A -", "B +", "B -", "O +", "O -", "AB +", "AB -" }));
-        pdatos.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(603, 191, 140, -1));
+        cboxtsangre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cboxtsangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A +", "A -", "B +", "B -", "O +", "O -", "AB +", "AB -" }));
+        pdatos.add(cboxtsangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(603, 191, 140, -1));
+
+        try {
+            txtcelularpx.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtcelularpx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtcelularpx, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 160, -1));
+
+        try {
+            txtdnipx.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtdnipx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtdnipx, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 210, -1));
 
         pprincipal.add(pdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 770, 280));
 
@@ -241,10 +291,10 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Anotaciones del Paciente:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtanotaciones.setColumns(20);
+        txtanotaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtanotaciones.setRows(5);
+        jScrollPane1.setViewportView(txtanotaciones);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
@@ -283,6 +333,9 @@ public class frmPaciente extends javax.swing.JFrame {
         pguardar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pguardar.setPreferredSize(new java.awt.Dimension(0, 83));
         pguardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pguardarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pguardarMouseEntered(evt);
             }
@@ -355,13 +408,13 @@ public class frmPaciente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_psalirMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtidpacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidpacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtidpacienteActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtdireccionpxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdireccionpxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtdireccionpxActionPerformed
 
     private void pguardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseEntered
         // TODO add your handling code here:
@@ -382,6 +435,15 @@ public class frmPaciente extends javax.swing.JFrame {
         // TODO add your handling code here:
         pcancelar.setBackground(new Color(247,247,247));
     }//GEN-LAST:event_pcancelarMouseExited
+
+    private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
+        // TODO add your handling code here:
+       String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +","+ txtnombrespx.getText() +","+ txtapellidospx.getText() +","+ txtdireccionpx.getText() +","+ txtcelularpx.getText() +","+ txtcorreopx.getText() +","+ cboxestadocivil.getSelectedItem() +","+ cboxsexo.getSelectedItem() +","+ cboxtsangre.getSelectedItem() +","+ txtpais.getText() +","+ txtfnacimiento.getText() +","+ txtanotaciones.getText() +","+ lblfecha.getText() +"')";
+       cc.conectar();
+       cc.insertar(sql_insert);
+       cc.cerrar();
+       limpiar();
+    }//GEN-LAST:event_pguardarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -419,14 +481,12 @@ public class frmPaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JComboBox<String> cboxestadocivil;
+    private javax.swing.JComboBox<String> cboxsexo;
+    private javax.swing.JComboBox<String> cboxtsangre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -446,20 +506,22 @@ public class frmPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel lblfecha;
     private javax.swing.JPanel pcancelar;
     private javax.swing.JPanel pdatos;
     private javax.swing.JPanel pdatosclinicos;
     private javax.swing.JPanel pguardar;
     private javax.swing.JPanel pprincipal;
     private javax.swing.JPanel psalir;
+    private javax.swing.JTextArea txtanotaciones;
+    private javax.swing.JTextField txtapellidospx;
+    private javax.swing.JFormattedTextField txtcelularpx;
+    private javax.swing.JTextField txtcorreopx;
+    private javax.swing.JTextField txtdireccionpx;
+    private javax.swing.JFormattedTextField txtdnipx;
+    private javax.swing.JFormattedTextField txtfnacimiento;
+    private javax.swing.JTextField txtidpaciente;
+    private javax.swing.JTextField txtnombrespx;
+    private javax.swing.JTextField txtpais;
     // End of variables declaration//GEN-END:variables
 }

@@ -204,6 +204,7 @@ public class frmCitas extends javax.swing.JFrame {
         pagendar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, 62, -1));
 
         jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextField2.setToolTipText("Digite el Nombre del Paciente");
         pagendar.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 60, 145, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N

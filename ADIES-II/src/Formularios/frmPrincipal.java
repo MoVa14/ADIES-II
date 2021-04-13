@@ -48,6 +48,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         preportes = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        pmedicamentos = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -60,6 +62,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono.png"))); // NOI18N
 
         psalir.setBackground(new java.awt.Color(133, 156, 206));
+        psalir.setToolTipText("Salir");
         psalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 psalirMouseClicked(evt);
@@ -128,6 +131,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pcita.setBackground(new java.awt.Color(247, 247, 247));
         pcita.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pcita.setToolTipText("Cita");
         pcita.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pcitaMouseClicked(evt);
@@ -162,6 +166,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         ppaciente.setBackground(new java.awt.Color(247, 247, 247));
         ppaciente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        ppaciente.setToolTipText("Paciente");
         ppaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ppacienteMouseClicked(evt);
@@ -192,6 +197,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pmedico.setBackground(new java.awt.Color(247, 247, 247));
         pmedico.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pmedico.setToolTipText("Médico");
         pmedico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pmedicoMouseEntered(evt);
@@ -219,6 +225,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pconsulta.setBackground(new java.awt.Color(247, 247, 247));
         pconsulta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pconsulta.setToolTipText("Consulta/Facturación");
         pconsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pconsultaMouseEntered(evt);
@@ -237,7 +244,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         pconsulta.setLayout(pconsultaLayout);
         pconsultaLayout.setHorizontalGroup(
             pconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
         );
         pconsultaLayout.setVerticalGroup(
             pconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,6 +253,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         preportes.setBackground(new java.awt.Color(247, 247, 247));
         preportes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        preportes.setToolTipText("Reportes");
         preportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 preportesMouseEntered(evt);
@@ -264,11 +272,39 @@ public class frmPrincipal extends javax.swing.JFrame {
         preportes.setLayout(preportesLayout);
         preportesLayout.setHorizontalGroup(
             preportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
         );
         preportesLayout.setVerticalGroup(
             preportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pmedicamentos.setBackground(new java.awt.Color(247, 247, 247));
+        pmedicamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pmedicamentos.setToolTipText("Almacen");
+        pmedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pmedicamentosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pmedicamentosMouseExited(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicamento.png"))); // NOI18N
+        jLabel10.setText("Almacen");
+
+        javax.swing.GroupLayout pmedicamentosLayout = new javax.swing.GroupLayout(pmedicamentos);
+        pmedicamentos.setLayout(pmedicamentosLayout);
+        pmedicamentosLayout.setHorizontalGroup(
+            pmedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+        );
+        pmedicamentosLayout.setVerticalGroup(
+            pmedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pprincipalLayout = new javax.swing.GroupLayout(pprincipal);
@@ -277,19 +313,21 @@ public class frmPrincipal extends javax.swing.JFrame {
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pprincipalLayout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addComponent(pcita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ppaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pmedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE)
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pprincipalLayout.createSequentialGroup()
+                        .addComponent(pcita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ppaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pmedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pprincipalLayout.createSequentialGroup()
+                        .addComponent(pconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pmedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(preportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(91, 91, 91))
-            .addGroup(pprincipalLayout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(pconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(preportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pprincipalLayout.setVerticalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +342,8 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pconsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(preportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(preportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pmedicamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(55, 55, 55))
         );
 
@@ -328,55 +367,45 @@ public class frmPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_psalirMouseClicked
 
-    private void pcitaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseEntered
+    private void preportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preportesMouseExited
         // TODO add your handling code here:
-        this.pcita.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_pcitaMouseEntered
-
-    private void pcitaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseExited
-        // TODO add your handling code here:
-        this.pcita.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pcitaMouseExited
-
-    private void ppacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseEntered
-        // TODO add your handling code here:
-        this.ppaciente.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_ppacienteMouseEntered
-
-    private void ppacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseExited
-        // TODO add your handling code here:
-        this.ppaciente.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_ppacienteMouseExited
-
-    private void pmedicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseEntered
-        // TODO add your handling code here:
-        this.pmedico.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_pmedicoMouseEntered
-
-    private void pconsultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconsultaMouseEntered
-        // TODO add your handling code here:
-        this.pconsulta.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_pconsultaMouseEntered
+        preportes.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_preportesMouseExited
 
     private void preportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preportesMouseEntered
         // TODO add your handling code here:
         this.preportes.setBackground(new Color(133,156,206));
     }//GEN-LAST:event_preportesMouseEntered
 
-    private void pmedicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseExited
-        // TODO add your handling code here:
-        pmedico.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pmedicoMouseExited
-
     private void pconsultaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconsultaMouseExited
         // TODO add your handling code here:
         pconsulta.setBackground(new Color(247,247,247));
     }//GEN-LAST:event_pconsultaMouseExited
 
-    private void preportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preportesMouseExited
+    private void pconsultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconsultaMouseEntered
         // TODO add your handling code here:
-        preportes.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_preportesMouseExited
+        this.pconsulta.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_pconsultaMouseEntered
+
+    private void pmedicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseExited
+        // TODO add your handling code here:
+        pmedico.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_pmedicoMouseExited
+
+    private void pmedicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseEntered
+        // TODO add your handling code here:
+        this.pmedico.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_pmedicoMouseEntered
+
+    private void ppacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseExited
+        // TODO add your handling code here:
+        this.ppaciente.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_ppacienteMouseExited
+
+    private void ppacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseEntered
+        // TODO add your handling code here:
+        this.ppaciente.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_ppacienteMouseEntered
 
     private void ppacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseClicked
         // TODO add your handling code here:
@@ -384,11 +413,31 @@ public class frmPrincipal extends javax.swing.JFrame {
         abrir.setVisible(true);
     }//GEN-LAST:event_ppacienteMouseClicked
 
+    private void pcitaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseExited
+        // TODO add your handling code here:
+        this.pcita.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_pcitaMouseExited
+
+    private void pcitaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseEntered
+        // TODO add your handling code here:
+        this.pcita.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_pcitaMouseEntered
+
     private void pcitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseClicked
         // TODO add your handling code here:
         frmCitas abrir = new frmCitas();
         abrir.setVisible(true);
     }//GEN-LAST:event_pcitaMouseClicked
+
+    private void pmedicamentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicamentosMouseEntered
+        // TODO add your handling code here:
+        pmedicamentos.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_pmedicamentosMouseEntered
+
+    private void pmedicamentosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicamentosMouseExited
+        // TODO add your handling code here:
+        pmedicamentos.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_pmedicamentosMouseExited
 
     /**
      * @param args the command line arguments
@@ -427,6 +476,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -439,6 +489,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pcita;
     private javax.swing.JPanel pconsulta;
+    private javax.swing.JPanel pmedicamentos;
     private javax.swing.JPanel pmedico;
     private javax.swing.JPanel ppaciente;
     private javax.swing.JPanel pprincipal;
