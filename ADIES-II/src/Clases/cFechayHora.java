@@ -15,7 +15,7 @@ import java.util.Date;
 public class cFechayHora {
     public static String fecha(){
         Date fecha = new Date();
-        SimpleDateFormat formatofecha = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatofecha = new SimpleDateFormat("yyyy-MM-dd");
         return formatofecha.format(fecha);
     }
 }
