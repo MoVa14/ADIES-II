@@ -24,12 +24,15 @@ public class frmPaciente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.lblfecha.setText(cFechayHora.fecha());
-        txtidpaciente.setText(String.valueOf(auto_increment()));
+        /*txtidpaciente.setText(String.valueOf(auto_increment()));*/
     }
     
+    /*
     ConexionDB cc = new ConexionDB();
     
     public int auto_increment(){
+             
+        
         String sql_sel = "select max(ID_PX) from Pacientes";
         ResultSet result = null;
         cc.conectar();
@@ -40,14 +43,15 @@ public class frmPaciente extends javax.swing.JFrame {
                 id_px = result.getInt(1);
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
         }
         cc.cerrar();
         return ((id_px)+1);
     }
+    */
     
     public void limpiar(){
-        txtidpaciente.setText(String.valueOf(auto_increment()));
+       // txtidpaciente.setText(String.valueOf(auto_increment()));
         txtdnipx.setText("");
         txtnombrespx.setText("");
         txtapellidospx.setText("");
@@ -438,11 +442,13 @@ public class frmPaciente extends javax.swing.JFrame {
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
-       String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +","+ txtnombrespx.getText() +","+ txtapellidospx.getText() +","+ txtdireccionpx.getText() +","+ txtcelularpx.getText() +","+ txtcorreopx.getText() +","+ cboxestadocivil.getSelectedItem() +","+ cboxsexo.getSelectedItem() +","+ cboxtsangre.getSelectedItem() +","+ txtpais.getText() +","+ txtfnacimiento.getText() +","+ txtanotaciones.getText() +","+ lblfecha.getText() +"')";
+      /*
+        String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +","+ txtnombrespx.getText() +","+ txtapellidospx.getText() +","+ txtdireccionpx.getText() +","+ txtcelularpx.getText() +","+ txtcorreopx.getText() +","+ cboxestadocivil.getSelectedItem() +","+ cboxsexo.getSelectedItem() +","+ cboxtsangre.getSelectedItem() +","+ txtpais.getText() +","+ txtfnacimiento.getText() +","+ txtanotaciones.getText() +","+ lblfecha.getText() +"')";
        cc.conectar();
        cc.insertar(sql_insert);
        cc.cerrar();
        limpiar();
+        */
     }//GEN-LAST:event_pguardarMouseClicked
 
     /**
