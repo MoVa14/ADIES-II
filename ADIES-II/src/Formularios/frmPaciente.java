@@ -112,7 +112,7 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         pguardar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        pcancelar = new javax.swing.JPanel();
+        phpaciente = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -365,32 +365,35 @@ public class frmPaciente extends javax.swing.JFrame {
 
         pprincipal.add(pguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 110, 90));
 
-        pcancelar.setBackground(new java.awt.Color(247, 247, 247));
-        pcancelar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pcancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+        phpaciente.setBackground(new java.awt.Color(247, 247, 247));
+        phpaciente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        phpaciente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                phpacienteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pcancelarMouseEntered(evt);
+                phpacienteMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pcancelarMouseExited(evt);
+                phpacienteMouseExited(evt);
             }
         });
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/borrar.png"))); // NOI18N
 
-        javax.swing.GroupLayout pcancelarLayout = new javax.swing.GroupLayout(pcancelar);
-        pcancelar.setLayout(pcancelarLayout);
-        pcancelarLayout.setHorizontalGroup(
-            pcancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout phpacienteLayout = new javax.swing.GroupLayout(phpaciente);
+        phpaciente.setLayout(phpacienteLayout);
+        phpacienteLayout.setHorizontalGroup(
+            phpacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
         );
-        pcancelarLayout.setVerticalGroup(
-            pcancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        phpacienteLayout.setVerticalGroup(
+            phpacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        pprincipal.add(pcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 410, 110, 80));
+        pprincipal.add(phpaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 410, 110, 80));
 
         getContentPane().add(pprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 800, 510));
 
@@ -430,15 +433,15 @@ public class frmPaciente extends javax.swing.JFrame {
         pguardar.setBackground(new Color(247,247,247));
     }//GEN-LAST:event_pguardarMouseExited
 
-    private void pcancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcancelarMouseEntered
+    private void phpacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phpacienteMouseEntered
         // TODO add your handling code here:
-        pcancelar.setBackground(new Color(243,106,54));
-    }//GEN-LAST:event_pcancelarMouseEntered
+        phpaciente.setBackground(new Color(243,106,54));
+    }//GEN-LAST:event_phpacienteMouseEntered
 
-    private void pcancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcancelarMouseExited
+    private void phpacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phpacienteMouseExited
         // TODO add your handling code here:
-        pcancelar.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pcancelarMouseExited
+        phpaciente.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_phpacienteMouseExited
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
@@ -449,6 +452,12 @@ public class frmPaciente extends javax.swing.JFrame {
        limpiar();
        
     }//GEN-LAST:event_pguardarMouseClicked
+
+    private void phpacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phpacienteMouseClicked
+        // TODO add your handling code here:
+        frmHPacientes abrir = new frmHPacientes();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_phpacienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -512,10 +521,10 @@ public class frmPaciente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblfecha;
-    private javax.swing.JPanel pcancelar;
     private javax.swing.JPanel pdatos;
     private javax.swing.JPanel pdatosclinicos;
     private javax.swing.JPanel pguardar;
+    private javax.swing.JPanel phpaciente;
     private javax.swing.JPanel pprincipal;
     private javax.swing.JPanel psalir;
     private javax.swing.JTextArea txtanotaciones;
