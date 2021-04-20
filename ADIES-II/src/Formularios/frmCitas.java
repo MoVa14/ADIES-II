@@ -5,7 +5,10 @@
  */
 package Formularios;
 
+import Clases.ConexionDB;
 import java.awt.Color;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +22,98 @@ public class frmCitas extends javax.swing.JFrame {
     public frmCitas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        txtidcita.setText(String.valueOf(auto_increment()));
+        lblpendientes.setText(String.valueOf(citaspendientes())+" / "+String.valueOf(citas()));
+        lblatendido.setText(String.valueOf(citasatendidos())+" / "+String.valueOf(citas()));
+        lblcancelado.setText(String.valueOf(citascancelados())+" / "+String.valueOf(citas()));
+    }
+    
+    ConexionDB cc = new ConexionDB();
+    
+    public int auto_increment(){
+        String sql_sel = "select max(id_citas) from citas";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        int id_px=0;
+        try {
+            while (result.next()){
+                id_px = result.getInt(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "el error: "+e.toString());
+            //System.out.println(e.toString());
+        }
+        cc.cerrar();
+        return ((id_px)+1);
+    }
+    
+    public int citaspendientes(){
+        String sql_sel="select count(estado) as Estado from citas where estado='PENDIENTE' group by estado";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        int pend = 0;
+        try {
+            while(result.next()){
+                pend = result.getInt(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+        return pend;
+    }
+    
+    public int citasatendidos(){
+        String sql_sel="select count(estado) as Estado from citas where estado='ATENDIDO' group by estado";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        int aten = 0;
+        try {
+            while(result.next()){
+                aten = result.getInt(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+        return aten;
+    }
+    
+    public int citascancelados(){
+        String sql_sel="select count(estado) as Estado from citas where estado='CANCELADO' group by estado";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        int canc = 0;
+        try {
+            while(result.next()){
+                canc = result.getInt(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+        return canc;
+    }
+    
+    public int citas(){
+        String sql_sel="select count(estado) as Estado from citas";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        int cont = 0;
+        try {
+            while(result.next()){
+                cont = result.getInt(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+        return cont;
     }
 
     /**
@@ -39,25 +134,28 @@ public class frmCitas extends javax.swing.JFrame {
         presumen = new javax.swing.JPanel();
         pcpendientes = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        lblpendientes = new javax.swing.JLabel();
         pcatendidas = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        lblatendido = new javax.swing.JLabel();
         pccanceladas = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        lblcancelado = new javax.swing.JLabel();
         pagendar = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtidcita = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtpaciente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtmedico = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txtfecha = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbhora = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtamcita = new javax.swing.JTextArea();
         pconfirmar = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -115,6 +213,9 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Pendientes");
 
+        lblpendientes.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblpendientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pcpendientesLayout = new javax.swing.GroupLayout(pcpendientes);
         pcpendientes.setLayout(pcpendientesLayout);
         pcpendientesLayout.setHorizontalGroup(
@@ -123,13 +224,17 @@ public class frmCitas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addContainerGap(180, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pcpendientesLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblpendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pcpendientesLayout.setVerticalGroup(
             pcpendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pcpendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(lblpendientes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         presumen.add(pcpendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 270, -1));
@@ -140,6 +245,9 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Atendidas");
 
+        lblatendido.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblatendido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pcatendidasLayout = new javax.swing.GroupLayout(pcatendidas);
         pcatendidas.setLayout(pcatendidasLayout);
         pcatendidasLayout.setHorizontalGroup(
@@ -148,13 +256,17 @@ public class frmCitas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addContainerGap(197, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pcatendidasLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblatendido, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pcatendidasLayout.setVerticalGroup(
             pcatendidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pcatendidasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(lblatendido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         presumen.add(pcatendidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 280, -1));
@@ -165,6 +277,9 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Canceladas");
 
+        lblcancelado.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblcancelado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pccanceladasLayout = new javax.swing.GroupLayout(pccanceladas);
         pccanceladas.setLayout(pccanceladasLayout);
         pccanceladasLayout.setHorizontalGroup(
@@ -173,13 +288,17 @@ public class frmCitas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addContainerGap(149, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pccanceladasLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblcancelado, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pccanceladasLayout.setVerticalGroup(
             pccanceladasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pccanceladasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(lblcancelado, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         presumen.add(pccanceladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 240, -1));
@@ -190,44 +309,45 @@ public class frmCitas extends javax.swing.JFrame {
         pagendar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agendar Cita", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         pagendar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtidcita.setEditable(false);
+        txtidcita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtidcita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtidcitaActionPerformed(evt);
             }
         });
-        pagendar.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 30, 115, -1));
+        pagendar.add(txtidcita, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 30, 115, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Paciente");
         pagendar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, 62, -1));
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField2.setToolTipText("Digite el Nombre del Paciente");
-        pagendar.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 60, 145, -1));
+        txtpaciente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtpaciente.setToolTipText("Digite el Nombre del Paciente");
+        pagendar.add(txtpaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 60, 145, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("Medico");
+        jLabel7.setText("Médico");
         pagendar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 95, 62, -1));
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        pagendar.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 92, 145, -1));
+        txtmedico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pagendar.add(txtmedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 92, 145, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Fecha");
         pagendar.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 127, 62, -1));
 
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        pagendar.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 124, 176, -1));
+        txtfecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        txtfecha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pagendar.add(txtfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 124, 176, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Motivo de Cita:");
         pagendar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00" }));
-        pagendar.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 156, 176, -1));
+        cbhora.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cbhora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00" }));
+        pagendar.add(cbhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 156, 176, -1));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
@@ -241,14 +361,17 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel12.setText("Hora");
         pagendar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 159, 62, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtamcita.setColumns(20);
+        txtamcita.setRows(5);
+        jScrollPane1.setViewportView(txtamcita);
 
         pagendar.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 209, 280, -1));
 
         pconfirmar.setBackground(new java.awt.Color(247, 247, 247));
         pconfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pconfirmarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pconfirmarMouseEntered(evt);
             }
@@ -319,9 +442,9 @@ public class frmCitas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_psalirMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtidcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidcitaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtidcitaActionPerformed
 
     private void pconfirmarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconfirmarMouseEntered
         // TODO add your handling code here:
@@ -332,6 +455,17 @@ public class frmCitas extends javax.swing.JFrame {
         // TODO add your handling code here:
         pconfirmar.setBackground(new Color(247,247,247));
     }//GEN-LAST:event_pconfirmarMouseExited
+
+    private void pconfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconfirmarMouseClicked
+        // TODO add your handling code here:
+        String paciente = txtpaciente.getText().toString();
+        String Medico = txtmedico.getText().toString();
+        String fecha = txtfecha.getText();
+        String hora = String.valueOf(cbhora.getSelectedItem());
+        String motivo = txtamcita.getText().toString();
+        
+        System.out.println(hora);
+    }//GEN-LAST:event_pconfirmarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -369,8 +503,7 @@ public class frmCitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JComboBox<String> cbhora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -390,10 +523,9 @@ public class frmCitas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblatendido;
+    private javax.swing.JLabel lblcancelado;
+    private javax.swing.JLabel lblpendientes;
     private javax.swing.JPanel pagendar;
     private javax.swing.JPanel pbarra;
     private javax.swing.JPanel pcatendidas;
@@ -403,5 +535,10 @@ public class frmCitas extends javax.swing.JFrame {
     private javax.swing.JPanel pprincipal;
     private javax.swing.JPanel presumen;
     private javax.swing.JPanel psalir;
+    private javax.swing.JTextArea txtamcita;
+    private javax.swing.JFormattedTextField txtfecha;
+    private javax.swing.JTextField txtidcita;
+    private javax.swing.JTextField txtmedico;
+    private javax.swing.JTextField txtpaciente;
     // End of variables declaration//GEN-END:variables
 }

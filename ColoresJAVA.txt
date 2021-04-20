@@ -7,5 +7,8 @@ color fondo gris
 color verde
 .setBackground(new Color(51,204,51));
 
-color para borrar
+color para actualizar naranja
 .setBackground(new Color(243,106,54));
+
+color rojo para eliminar y cerrar
+.setBackground(Color.red);

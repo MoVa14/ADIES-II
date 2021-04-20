@@ -199,6 +199,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         pmedico.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pmedico.setToolTipText("Médico");
         pmedico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pmedicoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pmedicoMouseEntered(evt);
             }
@@ -281,7 +284,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pmedicamentos.setBackground(new java.awt.Color(247, 247, 247));
         pmedicamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pmedicamentos.setToolTipText("Almacen");
+        pmedicamentos.setToolTipText("Almacén");
         pmedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pmedicamentosMouseEntered(evt);
@@ -294,7 +297,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicamento.png"))); // NOI18N
-        jLabel10.setText("Almacen");
+        jLabel10.setText("Almacén");
 
         javax.swing.GroupLayout pmedicamentosLayout = new javax.swing.GroupLayout(pmedicamentos);
         pmedicamentos.setLayout(pmedicamentosLayout);
@@ -438,6 +441,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         pmedicamentos.setBackground(new Color(247,247,247));
     }//GEN-LAST:event_pmedicamentosMouseExited
+
+    private void pmedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseClicked
+        // TODO add your handling code here:
+        frmMedicos abrir = new frmMedicos();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_pmedicoMouseClicked
 
     /**
      * @param args the command line arguments

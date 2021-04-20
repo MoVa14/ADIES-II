@@ -215,7 +215,7 @@ public class frmHPacientes extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        String sql_sel="select  No_DNIPX, upper(Nombres_PX) as Nombres_PX, upper(Apellidos_PX) as Apellidos_PX, Celular_PX, upper(Sexo_PX) as Sexo_PX, upper(TSangre_PX) as TSangre_PX, FNacimiento_PX from Pacientes order by Nombres_PX";
+        String sql_sel="select  No_DNIPX, Nombres_PX, Apellidos_PX, Celular_PX, Sexo_PX, TSangre_PX, FNacimiento_PX from Pacientes order by Nombres_PX";
         ResultSet result = null;
         cc.conectar();
         result = cc.seleccionar(sql_sel);
@@ -239,6 +239,27 @@ public class frmHPacientes extends javax.swing.JFrame {
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
         // TODO add your handling code here:
+        model.setRowCount(0);
+        String sql_sel="select  No_DNIPX, Nombres_PX, Apellidos_PX, Celular_PX, Sexo_PX, TSangre_PX, FNacimiento_PX from Pacientes where Nombres_PX like '%"+ txtbuscar.getText().toString() +"%' order by Nombres_PX";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            while (result.next()){
+                model.addRow(new Object[]{
+                    result.getString("No_DNIPX"),
+                    result.getString("Nombres_PX"),
+                    result.getString("Apellidos_PX"),
+                    result.getString("Celular_PX"),
+                    result.getString("Sexo_PX"),
+                    result.getString("TSangre_PX"),
+                    result.getString("FNacimiento_PX")
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El Error es: "+e.toString());
+        }
+        cc.cerrar();
     }//GEN-LAST:event_txtbuscarKeyReleased
 
     /**

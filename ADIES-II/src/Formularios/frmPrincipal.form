@@ -321,6 +321,7 @@
             <Property name="toolTipText" type="java.lang.String" value="M&#xe9;dico"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pmedicoMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pmedicoMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pmedicoMouseExited"/>
           </Events>
@@ -450,7 +451,7 @@
                 <BevelBorder/>
               </Border>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Almacen"/>
+            <Property name="toolTipText" type="java.lang.String" value="Almac&#xe9;n"/>
           </Properties>
           <Events>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pmedicamentosMouseEntered"/>
@@ -479,7 +480,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Imagenes/medicamento.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Almacen"/>
+                <Property name="text" type="java.lang.String" value="Almac&#xe9;n"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -26,6 +26,7 @@ public class frmPaciente extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.lblfecha.setText(cFechayHora.fecha());
         txtidpaciente.setText(String.valueOf(auto_increment()));
+        
     }
     
     
@@ -100,11 +101,11 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtpais = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtfnacimiento = new javax.swing.JFormattedTextField();
         jLabel15 = new javax.swing.JLabel();
         cboxtsangre = new javax.swing.JComboBox<>();
         txtcelularpx = new javax.swing.JFormattedTextField();
         txtdnipx = new javax.swing.JFormattedTextField();
+        txtfnacimiento = new javax.swing.JFormattedTextField();
         pdatosclinicos = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -259,10 +260,6 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel14.setText("Fecha de Nacimiento");
         pdatos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 235, -1, -1));
 
-        txtfnacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd-MM-yyyy"))));
-        txtfnacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(txtfnacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 232, 210, -1));
-
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Tipo de Sangre");
         pdatos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 194, 100, -1));
@@ -286,6 +283,10 @@ public class frmPaciente extends javax.swing.JFrame {
         }
         txtdnipx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pdatos.add(txtdnipx, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 210, -1));
+
+        txtfnacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        txtfnacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pdatos.add(txtfnacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 210, 30));
 
         pprincipal.add(pdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 770, 280));
 
@@ -445,11 +446,20 @@ public class frmPaciente extends javax.swing.JFrame {
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
-       cc.conectar();
-       String sql_insert="insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('"+ txtdnipx.getText() +"','"+ txtnombrespx.getText() +"','"+ txtapellidospx.getText() +"','"+ txtdireccionpx.getText() +"','"+ txtcelularpx.getText() +"','"+ txtcorreopx.getText() +"','"+ cboxestadocivil.getSelectedItem() +"','"+ cboxsexo.getSelectedItem() +"','"+ cboxtsangre.getSelectedItem() +"','"+ txtpais.getText() +"','"+ txtfnacimiento.getText() +"','"+ txtanotaciones.getText() +"','"+ lblfecha.getText() +"')";
-       cc.insertar(sql_insert);
-       cc.cerrar();
-       limpiar();
+       if (txtdnipx.getText().isEmpty() || txtnombrespx.getText().isEmpty() || txtapellidospx.getText().isEmpty() ||
+           txtdireccionpx.getText().isEmpty() || txtcelularpx.getText().isEmpty() || txtpais.getText().isEmpty()  || 
+           txtfnacimiento.getText().isEmpty() ||txtanotaciones.getText().isEmpty()){
+           
+           JOptionPane.showMessageDialog(null, "Faltan Datos por Ingresar, Revisar Formulario");
+       }
+       else{
+           cc.conectar();
+           String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('" + txtdnipx.getText() + "',upper('" + txtnombrespx.getText() + "'),upper('" + txtapellidospx.getText() + "'),upper('" + txtdireccionpx.getText() + "'),'" + txtcelularpx.getText() + "',lower('" + txtcorreopx.getText() + "'),upper('" + cboxestadocivil.getSelectedItem() + "'),upper('" + cboxsexo.getSelectedItem() + "'),'" + cboxtsangre.getSelectedItem() + "',upper('" + txtpais.getText() + "'),'" + txtfnacimiento.getText() + "',upper('" + txtanotaciones.getText() + "'),'" + lblfecha.getText() + "')";
+           cc.insertar(sql_insert);
+           cc.cerrar();
+           limpiar();
+       }
+       
        
     }//GEN-LAST:event_pguardarMouseClicked
 
