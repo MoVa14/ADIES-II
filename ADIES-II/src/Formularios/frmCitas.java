@@ -194,7 +194,7 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
         pbarra.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel16.setText("Registro de Citas");
         pbarra.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 300, 30));
 

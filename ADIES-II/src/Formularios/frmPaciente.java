@@ -153,7 +153,7 @@ public class frmPaciente extends javax.swing.JFrame {
 
         jPanel1.add(psalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(768, 0, -1, -1));
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel20.setText("Registro de Pacientes");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 210, 30));
 

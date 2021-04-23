@@ -230,6 +230,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         pconsulta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pconsulta.setToolTipText("Consulta/Facturación");
         pconsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pconsultaMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pconsultaMouseEntered(evt);
             }
@@ -258,6 +261,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         preportes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         preportes.setToolTipText("Reportes");
         preportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                preportesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 preportesMouseEntered(evt);
             }
@@ -286,6 +292,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         pmedicamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         pmedicamentos.setToolTipText("Almacén");
         pmedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pmedicamentosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pmedicamentosMouseEntered(evt);
             }
@@ -447,6 +456,24 @@ public class frmPrincipal extends javax.swing.JFrame {
         frmMedicos abrir = new frmMedicos();
         abrir.setVisible(true);
     }//GEN-LAST:event_pmedicoMouseClicked
+
+    private void pmedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicamentosMouseClicked
+        // TODO add your handling code here:
+        frmMedicamentos abrir = new frmMedicamentos();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_pmedicamentosMouseClicked
+
+    private void preportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preportesMouseClicked
+        // TODO add your handling code here:
+        frmReportes abrir = new frmReportes();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_preportesMouseClicked
+
+    private void pconsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconsultaMouseClicked
+        // TODO add your handling code here:
+        frmConsultas abrir = new frmConsultas();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_pconsultaMouseClicked
 
     /**
      * @param args the command line arguments
