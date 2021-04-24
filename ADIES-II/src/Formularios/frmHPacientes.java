@@ -27,7 +27,27 @@ public class frmHPacientes extends javax.swing.JFrame {
     }
     ConexionDB cc = new ConexionDB();
     DefaultTableModel model;
-
+    
+    public void pasar_datos(){
+        int fila = t_pacientes.getSelectedRow();
+        String nombre = t_pacientes.getValueAt(fila, 1).toString();
+        
+        ResultSet result = null;
+        String sql_sel = "select ID_PX, Nombres_PX \n"
+                + "from Pacientes \n"
+                + "where Nombres_PX like '%"+nombre+"%'";
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            frmCitas.txtidpx.setText(String.valueOf(result.getInt("ID_PX")));
+            frmCitas.txtpaciente.setText(result.getString("Nombres_PX"));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +64,9 @@ public class frmHPacientes extends javax.swing.JFrame {
         pprincipal = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_pacientes = new javax.swing.JTable();
-        pregreso = new javax.swing.JPanel();
+        pagregar = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        pactualizar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtbuscar = new javax.swing.JTextField();
@@ -120,6 +142,11 @@ public class frmHPacientes extends javax.swing.JFrame {
                 "N° DNI", "Nombres", "Apellidos", "Celular", "Sexo", "T. Sangre", "Fecha Nacimiento"
             }
         ));
+        t_pacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                t_pacientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(t_pacientes);
         if (t_pacientes.getColumnModel().getColumnCount() > 0) {
             t_pacientes.getColumnModel().getColumn(0).setPreferredWidth(130);
@@ -140,30 +167,53 @@ public class frmHPacientes extends javax.swing.JFrame {
 
         pprincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 890, 340));
 
-        pregreso.setBackground(new java.awt.Color(247, 247, 247));
-        pregreso.setToolTipText("Regresar a Ventana Registro de Pacientes");
-        pregreso.addMouseListener(new java.awt.event.MouseAdapter() {
+        pagregar.setBackground(new java.awt.Color(247, 247, 247));
+        pagregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pagregar.setToolTipText("Agregar Paciente");
+        pagregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pregresoMouseClicked(evt);
+                pagregarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pregresoMouseEntered(evt);
+                pagregarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pregresoMouseExited(evt);
+                pagregarMouseExited(evt);
             }
         });
-        pregreso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pagregar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
+        pagregar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+
+        pprincipal.add(pagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 40, 40));
+
+        pactualizar.setBackground(new java.awt.Color(247, 247, 247));
+        pactualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pactualizar.setToolTipText("Agregar Paciente");
+        pactualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pactualizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pactualizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pactualizarMouseExited(evt);
+            }
+        });
+        pactualizar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/regreso.png"))); // NOI18N
-        pregreso.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
+        pactualizar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
 
-        pprincipal.add(pregreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 40, 40));
+        pprincipal.add(pactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 40, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Ingrese el Nombre del Paciente a Buscar:");
-        pprincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 240, 40));
+        pprincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 230, 40));
 
         txtbuscar.setBackground(new java.awt.Color(247, 247, 247));
         txtbuscar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -201,20 +251,20 @@ public class frmHPacientes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_psalirMouseClicked
 
-    private void pregresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pregresoMouseClicked
+    private void pactualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_pregresoMouseClicked
+        
+    }//GEN-LAST:event_pactualizarMouseClicked
 
-    private void pregresoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pregresoMouseEntered
+    private void pactualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseEntered
         // TODO add your handling code here:
-        pregreso.setBackground(new Color(243,106,54));
-    }//GEN-LAST:event_pregresoMouseEntered
+        pactualizar.setBackground(new Color(243,106,54));
+    }//GEN-LAST:event_pactualizarMouseEntered
 
-    private void pregresoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pregresoMouseExited
+    private void pactualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseExited
         // TODO add your handling code here:
-        pregreso.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pregresoMouseExited
+        pactualizar.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_pactualizarMouseExited
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
         // TODO add your handling code here:
@@ -269,6 +319,28 @@ public class frmHPacientes extends javax.swing.JFrame {
         cc.cerrar();
     }//GEN-LAST:event_txtbuscarKeyReleased
 
+    private void pagregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseClicked
+        // TODO add your handling code here:
+        frmPaciente abrir = new frmPaciente();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_pagregarMouseClicked
+
+    private void pagregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseEntered
+        // TODO add your handling code here:
+        pagregar.setBackground(new Color(51,204,51));
+    }//GEN-LAST:event_pagregarMouseEntered
+
+    private void pagregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseExited
+        // TODO add your handling code here:
+        pagregar.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_pagregarMouseExited
+
+    private void t_pacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_pacientesMouseClicked
+        // TODO add your handling code here:
+        pasar_datos();
+        this.dispose();
+    }//GEN-LAST:event_t_pacientesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -309,11 +381,13 @@ public class frmHPacientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel pactualizar;
+    private javax.swing.JPanel pagregar;
     private javax.swing.JPanel pprincipal;
-    private javax.swing.JPanel pregreso;
     private javax.swing.JPanel psalir;
     private javax.swing.JTable t_pacientes;
     private javax.swing.JTextField txtbuscar;

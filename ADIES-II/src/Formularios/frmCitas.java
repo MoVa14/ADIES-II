@@ -6,9 +6,11 @@
 package Formularios;
 
 import Clases.ConexionDB;
+import Clases.cFechayHora;
 import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +24,7 @@ public class frmCitas extends javax.swing.JFrame {
     public frmCitas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        model = (DefaultTableModel) t_citas.getModel();
         txtidcita.setText(String.valueOf(auto_increment()));
         lblpendientes.setText(String.valueOf(citaspendientes())+" / "+String.valueOf(citas()));
         lblatendido.setText(String.valueOf(citasatendidos())+" / "+String.valueOf(citas()));
@@ -29,6 +32,8 @@ public class frmCitas extends javax.swing.JFrame {
     }
     
     ConexionDB cc = new ConexionDB();
+    cFechayHora fecha = new cFechayHora();
+    DefaultTableModel model;
     
     public int auto_increment(){
         String sql_sel = "select max(id_citas) from citas";
@@ -115,6 +120,47 @@ public class frmCitas extends javax.swing.JFrame {
         cc.cerrar();
         return cont;
     }
+    
+    public void mostarcitas(){
+        model.setRowCount(0);
+        String fecha = cFechayHora.fecha();
+        String sql_sel = "select p.Nombres_PX, p.Celular_PX,m.Nombre, c.fecha, c.hora, c.motivo\n"
+                + "from citas as c\n"
+                + "inner join Pacientes as p on c.ID_PX = p.ID_PX\n"
+                + "inner join Medicos as m on c.ID_Medico = m.ID_Medico\n"
+                + "where c.fecha='"+fecha+"' and c.estado='PENDIENTE';";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            while(result.next()){
+                model.addRow(new Object[]{
+                result.getString("Nombres_PX"),
+                result.getString("Celular_PX"),
+                result.getString("Nombre"),
+                result.getString("fecha"),
+                result.getString("hora"),
+                result.getString("motivo")
+            });
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+    }
+    
+    public void limpiar(){
+        txtidcita.setText(String.valueOf(auto_increment()));
+        txtidpx.setText("");
+        txtpaciente.setText("");
+        txtidmed.setText("");
+        txtmedico.setText("");
+        txtamcita.setText("");
+        lblpendientes.setText(String.valueOf(citaspendientes())+" / "+String.valueOf(citas()));
+        lblatendido.setText(String.valueOf(citasatendidos())+" / "+String.valueOf(citas()));
+        lblcancelado.setText(String.valueOf(citascancelados())+" / "+String.valueOf(citas()));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,19 +194,21 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtmedico = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtfecha = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         cbhora = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblbuscarpx = new javax.swing.JLabel();
+        lblbuscardoc = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtamcita = new javax.swing.JTextArea();
         pconfirmar = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jfechacita = new com.toedter.calendar.JDateChooser();
+        txtidpx = new javax.swing.JTextField();
+        txtidmed = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        t_citas = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -307,7 +355,6 @@ public class frmCitas extends javax.swing.JFrame {
 
         pagendar.setBackground(new java.awt.Color(247, 247, 247));
         pagendar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agendar Cita", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        pagendar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtidcita.setEditable(false);
         txtidcita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -316,56 +363,55 @@ public class frmCitas extends javax.swing.JFrame {
                 txtidcitaActionPerformed(evt);
             }
         });
-        pagendar.add(txtidcita, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 30, 115, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Paciente");
-        pagendar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, 62, -1));
 
+        txtpaciente.setBackground(new java.awt.Color(0, 0, 0));
         txtpaciente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtpaciente.setForeground(new java.awt.Color(255, 255, 255));
         txtpaciente.setToolTipText("Digite el Nombre del Paciente");
-        pagendar.add(txtpaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 60, 145, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Médico");
-        pagendar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 95, 62, -1));
 
+        txtmedico.setBackground(new java.awt.Color(0, 0, 0));
         txtmedico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        pagendar.add(txtmedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 92, 145, -1));
+        txtmedico.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Fecha");
-        pagendar.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 127, 62, -1));
-
-        txtfecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
-        txtfecha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        pagendar.add(txtfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 124, 176, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setText("Motivo de Cita:");
-        pagendar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, -1));
 
         cbhora.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbhora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00" }));
-        pagendar.add(cbhora, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 156, 176, -1));
 
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
-        pagendar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 30, 30));
+        lblbuscarpx.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbuscarpx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
+        lblbuscarpx.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblbuscarpx.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblbuscarpxMouseClicked(evt);
+            }
+        });
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
-        pagendar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 30, 30));
+        lblbuscardoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbuscardoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/lupa.png"))); // NOI18N
+        lblbuscardoc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblbuscardoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblbuscardocMouseClicked(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel12.setText("Hora");
-        pagendar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 159, 62, -1));
 
         txtamcita.setColumns(20);
         txtamcita.setRows(5);
         jScrollPane1.setViewportView(txtamcita);
-
-        pagendar.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 209, 280, -1));
 
         pconfirmar.setBackground(new java.awt.Color(247, 247, 247));
         pconfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -392,29 +438,137 @@ public class frmCitas extends javax.swing.JFrame {
         );
         pconfirmarLayout.setVerticalGroup(
             pconfirmarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
         );
-
-        pagendar.add(pconfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 150, 30));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("No. Registro de Cita");
-        pagendar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 33, -1, -1));
+
+        jfechacita.setBackground(new java.awt.Color(247, 247, 247));
+        jfechacita.setDateFormatString("dd-MM-yyyy");
+        jfechacita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        txtidpx.setBackground(new java.awt.Color(0, 0, 0));
+        txtidpx.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtidpx.setForeground(new java.awt.Color(255, 255, 255));
+        txtidpx.setToolTipText("Digite el Nombre del Paciente");
+
+        txtidmed.setBackground(new java.awt.Color(0, 0, 0));
+        txtidmed.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtidmed.setForeground(new java.awt.Color(255, 255, 255));
+        txtidmed.setToolTipText("Digite el Nombre del Paciente");
+
+        javax.swing.GroupLayout pagendarLayout = new javax.swing.GroupLayout(pagendar);
+        pagendar.setLayout(pagendarLayout);
+        pagendarLayout.setHorizontalGroup(
+            pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pagendarLayout.createSequentialGroup()
+                .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pagendarLayout.createSequentialGroup()
+                        .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel14)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtidcita, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(jfechacita, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(cbhora, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(pconfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addGroup(pagendarLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtidpx, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtidmed, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addComponent(txtmedico)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblbuscardoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addComponent(txtpaciente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblbuscarpx, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+        );
+        pagendarLayout.setVerticalGroup(
+            pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pagendarLayout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pagendarLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel14))
+                    .addComponent(txtidcita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblbuscarpx, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtidpx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtpaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2)
+                .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pagendarLayout.createSequentialGroup()
+                        .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel7)
+                                .addComponent(txtidmed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtmedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jLabel8))
+                            .addComponent(jfechacita, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pagendarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pagendarLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel12))
+                            .addComponent(cbhora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel9))
+                    .addComponent(lblbuscardoc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pconfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         pprincipal.add(pagendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 320, 360));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        t_citas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Paciente", "Medico", "Especialidad", "Fecha", "Hora", "Motivo"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(t_citas);
 
         pprincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 540, 310));
 
@@ -458,14 +612,45 @@ public class frmCitas extends javax.swing.JFrame {
 
     private void pconfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconfirmarMouseClicked
         // TODO add your handling code here:
-        String paciente = txtpaciente.getText().toString();
-        String Medico = txtmedico.getText().toString();
-        String fecha = txtfecha.getText();
+        int idpaciente = Integer.parseInt(txtidpx.getText());
+        int idMedico = Integer.parseInt(txtidmed.getText());
         String hora = String.valueOf(cbhora.getSelectedItem());
         String motivo = txtamcita.getText().toString();
+        int idcm = 1;
+        String estado = "PENDIENTE";
+        String sql_insert = "insert into citas\n"
+                + "(ID_PX,ID_Medico,fecha,hora,id_CentroMedico,motivo,estado) \n"
+                + "values \n"
+                + "("+idpaciente+","+idMedico+",'"+fecha.ffecha(jfechacita)+"','"+hora+"',"+idcm+",upper('"+motivo+"'),'"+estado+"')";
         
-        System.out.println(hora);
+        if (txtidpx.getText().isEmpty() ||
+            txtidmed.getText().isEmpty() ||
+            txtamcita.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Favor revisar el formulario, falta datos por llenar.");
+        }
+        else{
+            cc.conectar();
+            cc.insertar(sql_insert);
+            cc.cerrar();
+            mostarcitas();
+            limpiar();
+            JOptionPane.showMessageDialog(null, "Se registro la cita correctamente.");
+        }
+        
+        
     }//GEN-LAST:event_pconfirmarMouseClicked
+
+    private void lblbuscarpxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuscarpxMouseClicked
+        // TODO add your handling code here:
+        frmHPacientes abrir = new frmHPacientes();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_lblbuscarpxMouseClicked
+
+    private void lblbuscardocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuscardocMouseClicked
+        // TODO add your handling code here:
+        frmMedicos abrir = new frmMedicos();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_lblbuscardocMouseClicked
 
     /**
      * @param args the command line arguments
@@ -505,8 +690,6 @@ public class frmCitas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbhora;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -522,8 +705,10 @@ public class frmCitas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private com.toedter.calendar.JDateChooser jfechacita;
     private javax.swing.JLabel lblatendido;
+    private javax.swing.JLabel lblbuscardoc;
+    private javax.swing.JLabel lblbuscarpx;
     private javax.swing.JLabel lblcancelado;
     private javax.swing.JLabel lblpendientes;
     private javax.swing.JPanel pagendar;
@@ -535,10 +720,12 @@ public class frmCitas extends javax.swing.JFrame {
     private javax.swing.JPanel pprincipal;
     private javax.swing.JPanel presumen;
     private javax.swing.JPanel psalir;
+    private javax.swing.JTable t_citas;
     private javax.swing.JTextArea txtamcita;
-    private javax.swing.JFormattedTextField txtfecha;
     private javax.swing.JTextField txtidcita;
-    private javax.swing.JTextField txtmedico;
-    private javax.swing.JTextField txtpaciente;
+    public static javax.swing.JTextField txtidmed;
+    public static javax.swing.JTextField txtidpx;
+    public static javax.swing.JTextField txtmedico;
+    public static javax.swing.JTextField txtpaciente;
     // End of variables declaration//GEN-END:variables
 }

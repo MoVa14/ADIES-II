@@ -28,7 +28,25 @@ public class frmMedicos extends javax.swing.JFrame {
     DefaultTableModel model;
     ConexionDB cc = new ConexionDB();
     
-
+    public void pasar_datos(){
+        int fila = t_medicos.getSelectedRow();
+        String nombre = t_medicos.getValueAt(fila, 0).toString();
+        
+        ResultSet result = null;
+        String sql_sel = "select ID_Medico, Nombre\n"
+                + "from Medicos\n"
+                + "where Nombre like '%"+nombre+"%'";
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            frmCitas.txtidmed.setText(String.valueOf(result.getInt("ID_Medico")));
+            frmCitas.txtmedico.setText(result.getString("Nombre"));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -281,8 +299,8 @@ public class frmMedicos extends javax.swing.JFrame {
 
     private void t_medicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_medicosMouseClicked
         // TODO add your handling code here:
-         System.out.println(model.getValueAt(t_medicos.getSelectedRow(),t_medicos.getSelectedColumn()));
-                
+        pasar_datos();
+        this.dispose();
                  
     }//GEN-LAST:event_t_medicosMouseClicked
 

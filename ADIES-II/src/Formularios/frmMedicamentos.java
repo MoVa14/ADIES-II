@@ -27,8 +27,6 @@ public class frmMedicamentos extends javax.swing.JFrame {
     }
     DefaultTableModel model;
     ConexionDB cc = new ConexionDB();
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -217,12 +215,12 @@ public class frmMedicamentos extends javax.swing.JFrame {
     private void psalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseEntered
         // TODO add your handling code here:
         psalir.setBackground(Color.red);
-        
+
     }//GEN-LAST:event_psalirMouseEntered
 
     private void psalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseExited
         // TODO add your handling code here:
-        psalir.setBackground(new Color(133,156,206));
+        psalir.setBackground(new Color(133, 156, 206));
     }//GEN-LAST:event_psalirMouseExited
 
     private void psalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseClicked
@@ -232,33 +230,33 @@ public class frmMedicamentos extends javax.swing.JFrame {
 
     private void pagregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseEntered
         // TODO add your handling code here:
-        pagregar.setBackground(new Color(51,204,51));
+        pagregar.setBackground(new Color(51, 204, 51));
     }//GEN-LAST:event_pagregarMouseEntered
 
     private void pagregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseExited
         // TODO add your handling code here:
-        pagregar.setBackground(new Color(247,247,247));
+        pagregar.setBackground(new Color(247, 247, 247));
     }//GEN-LAST:event_pagregarMouseExited
 
     private void pactualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseEntered
         // TODO add your handling code here:
-        pactualizar.setBackground(new Color(243,106,54));
+        pactualizar.setBackground(new Color(243, 106, 54));
     }//GEN-LAST:event_pactualizarMouseEntered
 
     private void pactualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseExited
         // TODO add your handling code here:
-        pactualizar.setBackground(new Color(247,247,247));
+        pactualizar.setBackground(new Color(247, 247, 247));
     }//GEN-LAST:event_pactualizarMouseExited
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         model.setRowCount(0);
-        String sql_sel="select nombre_com, compuesto, laboratorio, estante, existencias, f_elaboracion, f_vencimiento from medicamentos order by nombre_com";
+        String sql_sel = "select nombre_com, compuesto, laboratorio, estante, existencias, f_elaboracion, f_vencimiento from medicamentos order by nombre_com";
         ResultSet result = null;
         cc.conectar();
         result = cc.seleccionar(sql_sel);
         try {
-            while(result.next()){
+            while (result.next()) {
                 model.addRow(new Object[]{
                     result.getString("nombre_com"),
                     result.getString("compuesto"),
@@ -270,28 +268,50 @@ public class frmMedicamentos extends javax.swing.JFrame {
                 });
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "El Error es: "+e.toString());
+            JOptionPane.showMessageDialog(null, "El Error es: " + e.toString());
         }
         cc.cerrar();
-        
+
     }//GEN-LAST:event_formWindowOpened
+
+    public void pasar_datosmed() {
+
+        ResultSet result = null;
+        String sql_sel = "select id \n"
+                + "from medicamentos\n"
+                + "where nombre_com like'%"+frmConsultas.txtaddmed.getText()+"%';";
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            frmConsultas.txtidmed.setText(String.valueOf(result.getInt("id")));
+            
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+    }
 
     private void t_medicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_medicamentosMouseClicked
         // TODO add your handling code here:
-         System.out.println(model.getValueAt(t_medicamentos.getSelectedRow(),t_medicamentos.getSelectedColumn()));
-                
-                 
+        int fila = t_medicamentos.getSelectedRow();
+        frmConsultas.txtaddmed.setText(String.valueOf(t_medicamentos.getValueAt(fila, 0)));
+        pasar_datosmed();
+        this.dispose();
+        
+
+
     }//GEN-LAST:event_t_medicamentosMouseClicked
 
     private void txtbuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyReleased
         // TODO add your handling code here:
         model.setRowCount(0);
-        String sql_sel="select nombre_com, compuesto, laboratorio, estante, existencias, f_elaboracion, f_vencimiento from medicamentos where nombre_com like '%"+txtbuscar.getText().toString()+"%' order by nombre_com";
+        String sql_sel = "select nombre_com, compuesto, laboratorio, estante, existencias, f_elaboracion, f_vencimiento from medicamentos where nombre_com like '%" + txtbuscar.getText().toString() + "%' order by nombre_com";
         ResultSet result = null;
         cc.conectar();
         result = cc.seleccionar(sql_sel);
         try {
-            while(result.next()){
+            while (result.next()) {
                 model.addRow(new Object[]{
                     result.getString("nombre_com"),
                     result.getString("compuesto"),
@@ -303,7 +323,7 @@ public class frmMedicamentos extends javax.swing.JFrame {
                 });
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "El Error es: "+e.toString());
+            JOptionPane.showMessageDialog(null, "El Error es: " + e.toString());
         }
         cc.cerrar();
     }//GEN-LAST:event_txtbuscarKeyReleased
@@ -312,18 +332,18 @@ public class frmMedicamentos extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmAgregarMedicamento abrir = new frmAgregarMedicamento();
         abrir.setVisible(true);
-        
+
     }//GEN-LAST:event_pagregarMouseClicked
 
     private void pactualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseClicked
         // TODO add your handling code here:
         model.setRowCount(0);
-        String sql_sel="select nombre_com, compuesto, laboratorio, estante, existencias, f_elaboracion, f_vencimiento from medicamentos order by nombre_com";
+        String sql_sel = "select nombre_com, compuesto, laboratorio, estante, existencias, f_elaboracion, f_vencimiento from medicamentos order by nombre_com";
         ResultSet result = null;
         cc.conectar();
         result = cc.seleccionar(sql_sel);
         try {
-            while(result.next()){
+            while (result.next()) {
                 model.addRow(new Object[]{
                     result.getString("nombre_com"),
                     result.getString("compuesto"),
@@ -335,7 +355,7 @@ public class frmMedicamentos extends javax.swing.JFrame {
                 });
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "El Error es: "+e.toString());
+            JOptionPane.showMessageDialog(null, "El Error es: " + e.toString());
         }
         cc.cerrar();
     }//GEN-LAST:event_pactualizarMouseClicked

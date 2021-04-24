@@ -278,6 +278,7 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
             cc.insertar(sql_insert);
             cc.cerrar();
             limpiar();
+            JOptionPane.showMessageDialog(null, "Se ha ingresado exitosamente el medicamento.");
         }
         
     }//GEN-LAST:event_pguardarMouseClicked

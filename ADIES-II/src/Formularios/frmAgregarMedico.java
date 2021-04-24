@@ -294,6 +294,7 @@ public class frmAgregarMedico extends javax.swing.JFrame {
             cc.insertar(sql_insert);
             cc.cerrar();
             limpiar();
+            JOptionPane.showMessageDialog(null, "Se ha registrado el Médico con éxito.");
             this.dispose();
         }
         
