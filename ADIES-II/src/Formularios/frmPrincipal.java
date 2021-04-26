@@ -36,6 +36,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        lblindouser = new javax.swing.JLabel();
+        lblcargo = new javax.swing.JLabel();
+        pcerrars = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         pprincipal = new javax.swing.JPanel();
         pcita = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -107,23 +111,49 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 500));
 
         jPanel2.setBackground(new java.awt.Color(245, 213, 199));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/user.png"))); // NOI18N
-        jLabel1.setText("User");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 57));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 600, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+        lblindouser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblindouser.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(lblindouser, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 0, 355, 30));
+
+        lblcargo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel2.add(lblcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 36, 149, 21));
+
+        pcerrars.setBackground(new java.awt.Color(245, 213, 199));
+        pcerrars.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pcerrarsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pcerrarsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pcerrarsMouseExited(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cerrar-sesion.png"))); // NOI18N
+        jLabel11.setText(" Cerrar Sesión");
+
+        javax.swing.GroupLayout pcerrarsLayout = new javax.swing.GroupLayout(pcerrars);
+        pcerrars.setLayout(pcerrarsLayout);
+        pcerrarsLayout.setHorizontalGroup(
+            pcerrarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        pcerrarsLayout.setVerticalGroup(
+            pcerrarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
+
+        jPanel2.add(pcerrars, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, 170, 60));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 800, 60));
 
@@ -323,7 +353,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         pprincipal.setLayout(pprincipalLayout);
         pprincipalLayout.setHorizontalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pprincipalLayout.createSequentialGroup()
                 .addContainerGap(98, Short.MAX_VALUE)
                 .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,6 +369,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(preportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(91, 91, 91))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pprincipalLayout.setVerticalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,6 +505,23 @@ public class frmPrincipal extends javax.swing.JFrame {
         abrir.setVisible(true);
     }//GEN-LAST:event_pconsultaMouseClicked
 
+    private void pcerrarsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcerrarsMouseEntered
+        // TODO add your handling code here:
+        pcerrars.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_pcerrarsMouseEntered
+
+    private void pcerrarsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcerrarsMouseExited
+        // TODO add your handling code here:
+        pcerrars.setBackground(new Color(245,213,199));
+    }//GEN-LAST:event_pcerrarsMouseExited
+
+    private void pcerrarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcerrarsMouseClicked
+        // TODO add your handling code here:
+        frmLogin abrir = new frmLogin();
+        abrir.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_pcerrarsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -513,6 +560,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -523,6 +571,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public static javax.swing.JLabel lblcargo;
+    public static javax.swing.JLabel lblindouser;
+    private javax.swing.JPanel pcerrars;
     private javax.swing.JPanel pcita;
     private javax.swing.JPanel pconsulta;
     private javax.swing.JPanel pmedicamentos;

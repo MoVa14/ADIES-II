@@ -7,6 +7,12 @@ package Formularios;
 
 import Clases.ConexionDB;
 import Clases.cFechayHora;
+import static Formularios.frmConfirmarCita.txtccorreo;
+import static Formularios.frmConfirmarCita.txtcespecialidad1;
+import static Formularios.frmConfirmarCita.txtcid;
+import static Formularios.frmConfirmarCita.txtcidmed;
+import static Formularios.frmConfirmarCita.txtcmedico;
+import static Formularios.frmConfirmarCita.txtcpaciente;
 import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -29,8 +35,7 @@ public class frmCitas extends javax.swing.JFrame {
         lblpendientes.setText(String.valueOf(citaspendientes())+" / "+String.valueOf(citas()));
         lblatendido.setText(String.valueOf(citasatendidos())+" / "+String.valueOf(citas()));
         lblcancelado.setText(String.valueOf(citascancelados())+" / "+String.valueOf(citas()));
-       //lblsps.setText(String.valueOf(contar_CuposPSPS())+" / "+String.valueOf(CuposTSPS()));
-        //lblintibuca.setText(String.valueOf(contar_CuposPIntibuca())+" / "+String.valueOf(CuposTIntibuca()));
+        mostarcitas();
     }
     
     ConexionDB cc = new ConexionDB();
@@ -124,90 +129,10 @@ public class frmCitas extends javax.swing.JFrame {
     }
     
     
-    public int contar_CuposPSPS(){
-        String sql_sel = "select count(cm.id_CentroMedico) as uso \n"
-                + "from citas as c \n"
-                + "inner join CentroMedico as cm on c.id_CentroMedico = cm.id_CentroMedico\n"
-                + "where c.fecha like '2021-04-24' and c.estado='PENDIENTE'\n"
-                + "group by cm.id_CentroMedico;";
-        ResultSet result = null;
-        cc.conectar();
-        result = cc.seleccionar(sql_sel);
-        int cont = 0;
-        try {
-            while(result.next()){
-                cont = result.getInt(1);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-        cc.cerrar();
-        return cont;
-    }
-    
-    public int contar_CuposPIntibuca(){
-        String sql_sel = "select count(cm.id_CentroMedico) as uso \n"
-                + "from citas as c \n"
-                + "inner join CentroMedico as cm on c.id_CentroMedico = cm.id_CentroMedico\n"
-                + "where c.fecha like '2021-04-24' and c.estado='PENDIENTE'\n"
-                + "group by cm.id_CentroMedico;";
-        ResultSet result = null;
-        cc.conectar();
-        result = cc.seleccionar(sql_sel);
-        int cont = 0;
-        try {
-            while(result.next()){
-                cont = result.getInt(2);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-        cc.cerrar();
-        return cont;
-    }
-    
-    public int CuposTSPS(){
-        String sql_sel = "select Capacidad_CM\n"
-                + "from CentroMedico;";
-        ResultSet result = null;
-        cc.conectar();
-        result = cc.seleccionar(sql_sel);
-        int cont = 0;
-        try {
-            while(result.next()){
-                cont = result.getInt(1);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-        cc.cerrar();
-        return cont;
-    }
-    
-    public int CuposTIntibuca(){
-        String sql_sel = "select Capacidad_CM\n"
-                + "from CentroMedico;";
-        ResultSet result = null;
-        cc.conectar();
-        result = cc.seleccionar(sql_sel);
-        int cont = 0;
-        try {
-            while(result.next()){
-                cont = result.getInt(2);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-        cc.cerrar();
-        return cont;
-    }
-    
-    
-    
     public void mostarcitas(){
         model.setRowCount(0);
         String fecha = cFechayHora.fecha();
-        String sql_sel = "select p.Nombres_PX, p.Celular_PX,m.Nombre, c.fecha, c.hora, c.motivo\n"
+        String sql_sel = "select p.Nombres_PX, m.Nombre, m.Especialidad, c.fecha, c.hora, c.motivo\n"
                 + "from citas as c\n"
                 + "inner join Pacientes as p on c.ID_PX = p.ID_PX\n"
                 + "inner join Medicos as m on c.ID_Medico = m.ID_Medico\n"
@@ -219,8 +144,8 @@ public class frmCitas extends javax.swing.JFrame {
             while(result.next()){
                 model.addRow(new Object[]{
                 result.getString("Nombres_PX"),
-                result.getString("Celular_PX"),
                 result.getString("Nombre"),
+                result.getString("Especialidad"),
                 result.getString("fecha"),
                 result.getString("hora"),
                 result.getString("motivo")
@@ -243,10 +168,92 @@ public class frmCitas extends javax.swing.JFrame {
         lblpendientes.setText(String.valueOf(citaspendientes())+" / "+String.valueOf(citas()));
         lblatendido.setText(String.valueOf(citasatendidos())+" / "+String.valueOf(citas()));
         lblcancelado.setText(String.valueOf(citascancelados())+" / "+String.valueOf(citas()));
-        //lblsps.setText(String.valueOf(contar_CuposPSPS())+" / "+String.valueOf(CuposTSPS()));
-        //lblintibuca.setText(String.valueOf(contar_CuposPIntibuca())+" / "+String.valueOf(CuposTIntibuca()));
     }
-
+    
+    public void pasardatoscancelar(){
+        int fila = t_citas.getSelectedRow();
+        String nombrepx = t_citas.getValueAt(fila, 0).toString();
+        String medico = t_citas.getValueAt(fila, 1).toString();
+        String especialidad = t_citas.getValueAt(fila, 2).toString();
+        String fechac = t_citas.getValueAt(fila, 3).toString();
+        String hora = t_citas.getValueAt(fila, 4).toString();
+                
+        ResultSet result = null;
+        String sql_sel = "select c.id_citas, p.Nombres_PX, p.Apellidos_PX, m.Nombre, m.Especialidad, c.fecha, c.hora\n"
+                + "from citas as c\n"
+                + "inner join Pacientes as p on c.ID_PX = p.ID_PX\n"
+                + "inner join Medicos as m on c.ID_Medico = m.ID_Medico\n"
+                + "where p.Nombres_PX='"+nombrepx+"' and m.Nombre='"+medico+"' and m.Especialidad='"+especialidad+"' and c.fecha='"+fechac+"' and c.hora='"+hora+"'";
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            frmCancelarCita.txtcid.setText(String.valueOf(result.getInt("id_citas")));
+            frmCancelarCita.txtcpaciente.setText(result.getString("Nombres_PX")+" "+result.getString("Apellidos_PX"));
+            frmCancelarCita.txtcmedico.setText(result.getString("Nombre"));
+            frmCancelarCita.txtcespecialidad.setText(result.getString("Especialidad"));
+            frmCancelarCita.txtcfecha.setText(result.getString("fecha"));
+            frmCancelarCita.txtchora.setText(result.getString("hora"));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+    }
+    
+    public void ingresar_sql(){
+        int idpaciente = Integer.parseInt(txtidpx.getText());
+        int idMedico = Integer.parseInt(txtidmed.getText());
+        String hora = String.valueOf(cbhora.getSelectedItem());
+        String motivo = txtamcita.getText().toString();
+        int idcm = 1;
+        String estado = "PENDIENTE";
+        String sql_insert = "insert into citas\n"
+                + "(ID_PX,ID_Medico,fecha,hora,id_CentroMedico,motivo,estado) \n"
+                + "values \n"
+                + "("+idpaciente+","+idMedico+",'"+fecha.ffecha(jfechacita)+"','"+hora+"',"+idcm+",upper('"+motivo+"'),'"+estado+"')";
+        cc.conectar();
+        cc.insertar(sql_insert);
+        cc.cerrar();
+    }
+    
+    public void enviarpaciente(){
+        int idpaciente = Integer.parseInt(txtidpx.getText());
+                
+        ResultSet result = null;
+        String sql_sel = "select p.Nombres_PX, p.Apellidos_PX\n"
+                + "from Pacientes as p\n"
+                + "where p.ID_PX="+idpaciente+";";
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            frmConfirmarCita.txtcpaciente.setText(result.getString("Nombres_PX")+" "+result.getString("Apellidos_PX"));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+    }
+    
+    public void enviardoctor(){
+        int idmedico = Integer.parseInt(txtidmed.getText());
+                
+        ResultSet result = null;
+        String sql_sel = "select m.Nombre, m.Especialidad, m.Correo\n"
+                + "from Medicos as m\n"
+                + "where m.ID_Medico="+idmedico+";";
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            frmConfirmarCita.txtcmedico.setText(result.getString("Nombre"));
+            frmConfirmarCita.txtcespecialidad1.setText(result.getString("Especialidad"));
+            frmConfirmarCita.txtccorreo.setText(result.getString("Correo"));
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -295,8 +302,8 @@ public class frmCitas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         t_citas = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        lblsps = new javax.swing.JLabel();
-        lblintibuca = new javax.swing.JLabel();
+        btncancelar = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -663,15 +670,33 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel5.setText("Resumen de Citas del Dia");
         pprincipal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 200, 20));
 
-        lblsps.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblsps.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblsps.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CEMER SPS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-        pprincipal.add(lblsps, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, 120, 40));
+        btncancelar.setBackground(new java.awt.Color(247, 247, 247));
+        btncancelar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cancelar_citas.png"))); // NOI18N
+        btncancelar.setText("Cancelar Cita");
+        btncancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
+        pprincipal.add(btncancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, 130, 40));
 
-        lblintibuca.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblintibuca.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblintibuca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CEMER INTIBUCA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
-        pprincipal.add(lblintibuca, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 120, 40));
+        btnactualizar.setBackground(new java.awt.Color(247, 247, 247));
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
+        btnactualizar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnactualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnactualizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnactualizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnactualizarMouseExited(evt);
+            }
+        });
+        pprincipal.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(693, 160, 50, 40));
 
         getContentPane().add(pprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 900, 540));
 
@@ -709,16 +734,6 @@ public class frmCitas extends javax.swing.JFrame {
 
     private void pconfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconfirmarMouseClicked
         // TODO add your handling code here:
-        int idpaciente = Integer.parseInt(txtidpx.getText());
-        int idMedico = Integer.parseInt(txtidmed.getText());
-        String hora = String.valueOf(cbhora.getSelectedItem());
-        String motivo = txtamcita.getText().toString();
-        int idcm = 2;
-        String estado = "PENDIENTE";
-        String sql_insert = "insert into citas\n"
-                + "(ID_PX,ID_Medico,fecha,hora,id_CentroMedico,motivo,estado) \n"
-                + "values \n"
-                + "("+idpaciente+","+idMedico+",'"+fecha.ffecha(jfechacita)+"','"+hora+"',"+idcm+",upper('"+motivo+"'),'"+estado+"')";
         
         if (txtidpx.getText().isEmpty() ||
             txtidmed.getText().isEmpty() ||
@@ -726,12 +741,17 @@ public class frmCitas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Favor revisar el formulario, falta datos por llenar.");
         }
         else{
-            cc.conectar();
-            cc.insertar(sql_insert);
-            cc.cerrar();
-            mostarcitas();
-            limpiar();
-            JOptionPane.showMessageDialog(null, "Se registro la cita correctamente.");
+            frmConfirmarCita abrir = new frmConfirmarCita();
+            frmConfirmarCita.txtcid.setText(txtidcita.getText());
+            frmConfirmarCita.txtcidp.setText(txtidpx.getText());
+            frmConfirmarCita.txtcidmed.setText(txtidmed.getText());
+            frmConfirmarCita.txtcfecha.setText(fecha.ffecha(jfechacita));
+            frmConfirmarCita.txtchora.setText(cbhora.getSelectedItem().toString());
+            frmConfirmarCita.txtmotivocita.setText(txtamcita.getText());
+            enviarpaciente();
+            enviardoctor();
+            abrir.setVisible(true);
+            
         }
         
         
@@ -748,6 +768,33 @@ public class frmCitas extends javax.swing.JFrame {
         frmMedicos abrir = new frmMedicos();
         abrir.setVisible(true);
     }//GEN-LAST:event_lblbuscardocMouseClicked
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        // TODO add your handling code here:
+        frmCancelarCita abrir = new frmCancelarCita();
+        abrir.setVisible(true);
+        pasardatoscancelar();
+        
+    }//GEN-LAST:event_btncancelarActionPerformed
+
+    private void btnactualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnactualizarMouseEntered
+        // TODO add your handling code here:
+        btnactualizar.setBackground(new Color(243,106,54));
+    }//GEN-LAST:event_btnactualizarMouseEntered
+
+    private void btnactualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnactualizarMouseExited
+        // TODO add your handling code here:
+        btnactualizar.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btnactualizarMouseExited
+
+    private void btnactualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnactualizarMouseClicked
+        // TODO add your handling code here:
+        mostarcitas();
+        lblpendientes.setText(String.valueOf(citaspendientes())+" / "+String.valueOf(citas()));
+        lblatendido.setText(String.valueOf(citasatendidos())+" / "+String.valueOf(citas()));
+        lblcancelado.setText(String.valueOf(citascancelados())+" / "+String.valueOf(citas()));
+        limpiar();
+    }//GEN-LAST:event_btnactualizarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -785,6 +832,8 @@ public class frmCitas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnactualizar;
+    private javax.swing.JButton btncancelar;
     private javax.swing.JComboBox<String> cbhora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
@@ -807,9 +856,7 @@ public class frmCitas extends javax.swing.JFrame {
     private javax.swing.JLabel lblbuscardoc;
     private javax.swing.JLabel lblbuscarpx;
     private javax.swing.JLabel lblcancelado;
-    private javax.swing.JLabel lblintibuca;
     private javax.swing.JLabel lblpendientes;
-    private javax.swing.JLabel lblsps;
     private javax.swing.JPanel pagendar;
     private javax.swing.JPanel pbarra;
     private javax.swing.JPanel pcatendidas;

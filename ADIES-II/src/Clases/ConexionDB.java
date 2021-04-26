@@ -18,6 +18,7 @@ public class ConexionDB {
     public String url="jdbc:sqlite:C://Repositorio//ADIES-II//BD//ADIES.db";
     Connection connect;
     ResultSet result = null;
+    
     public void conectar(){
         try {
             connect = DriverManager.getConnection(url);

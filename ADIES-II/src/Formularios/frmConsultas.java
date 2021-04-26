@@ -8,9 +8,18 @@ package Formularios;
 import Clases.ConexionDB;
 import Clases.cFechayHora;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -29,8 +38,30 @@ public class frmConsultas extends javax.swing.JFrame {
         lblConsulta.setText(String.valueOf(auto_increment()));
     }
 
+    public String url="jdbc:sqlite:C://Repositorio//ADIES-II//BD//ADIES.db";
+    Connection connect;
+    
     ConexionDB cc = new ConexionDB();
     DefaultTableModel model;
+    
+    
+    void conectar(){
+        try {
+            connect = DriverManager.getConnection(url);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No Conectado el Error es: " + e.toString());
+            //System.out.println(e.toString());
+        }   
+    }
+    
+    void cerrar(){
+        try {
+            connect.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No Conectado el Error es: " + e.toString());
+           // System.out.println(e.toString());
+        }
+    }
 
     public void limpiarproducto(){
         txtidmed.setText("");
@@ -140,6 +171,28 @@ public class frmConsultas extends javax.swing.JFrame {
        cc.cerrar();
        JOptionPane.showMessageDialog(null, "El Estado se actualizo correctamente.");
    }
+   
+   public void imprimir_consulta(){
+            int respuesta = JOptionPane.showConfirmDialog(this, "Desea Imprimir la Consulta", "Confirmación", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION){
+                try {
+                conectar();
+                JasperReport reporte = (JasperReport) JRLoader.loadObject("C:\\Repositorio\\ADIES-II\\ADIES-II\\src\\Reportes\\report_consulta.jasper");
+                Map idcon = new HashMap();
+                idcon.put("id_cons", Integer.valueOf(lblConsulta.getText()));
+                JasperPrint imprimir = JasperFillManager.fillReport(reporte, idcon, connect);
+                JasperViewer vista = new JasperViewer(imprimir,false);
+                vista.setVisible(true);
+                cerrar();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.toString());
+            }
+            }
+            else if (respuesta == JOptionPane.NO_OPTION){
+                JOptionPane.showMessageDialog(this, "Se guardaron los datos con éxito.");
+            }
+            
+        }
     
 
     /**
@@ -327,7 +380,7 @@ public class frmConsultas extends javax.swing.JFrame {
         txtidmed.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtidmed.setForeground(new java.awt.Color(255, 255, 255));
 
-        txtprecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtprecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtprecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btnagregar.setBackground(new java.awt.Color(247, 247, 247));
@@ -816,8 +869,8 @@ public class frmConsultas extends javax.swing.JFrame {
             cc.insertar(sql_insert);
             cc.cerrar();
             actualizarEstado();
+            imprimir_consulta();
             limpiar();
-            JOptionPane.showMessageDialog(null, "Se Registraron los Datos Correctamente");
         }
         
     }//GEN-LAST:event_pguardarMouseClicked

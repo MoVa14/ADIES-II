@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="finical" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ffinal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaactual" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select ci.id_citas, ci.fecha,
+p.Nombres_PX, p.Apellidos_PX, 
+m.Nombre, m.Especialidad, 
+ci.motivo_c
+from citas as ci
+inner join Pacientes as p on ci.ID_PX = p.ID_PX
+inner join Medicos as m on ci.ID_Medico = m.ID_Medico
+where ci.estado='CANCELADO' and ci.fecha between $P{finical}  and $P{ffinal}]]>
+	</queryString>
+	<field name="id_citas" class="java.lang.Object"/>
+	<field name="fecha" class="java.lang.Object"/>
+	<field name="Nombres_PX" class="java.lang.Object"/>
+	<field name="Apellidos_PX" class="java.lang.Object"/>
+	<field name="Nombre" class="java.lang.Object"/>
+	<field name="Especialidad" class="java.lang.Object"/>
+	<field name="motivo_c" class="java.lang.Object"/>
+	<background>
+		<band height="572" splitType="Stretch">
+			<image scaleImage="RetainShape" hAlign="Center">
+				<reportElement x="141" y="228" width="479" height="308"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Repositorio\\ADIES-II\\ADIES-II\\src\\Imagenes\\IconoCM.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="100" height="95"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Repositorio\\ADIES-II\\ADIES-II\\src\\Imagenes\\logo_clinica.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="100" y="0" width="652" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEMER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="26" width="652" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="16"/>
+				</textElement>
+				<text><![CDATA[Centro Médico Restauración]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="46" width="652" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<text><![CDATA[una mano que te guía a la salud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="66" width="652" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<text><![CDATA[Residencial Real del Puente, Bloque K, Casa No. 27, Villanueva, Cortes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="86" width="326" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<text><![CDATA[Telefono: 2550-2525]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="86" width="326" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<text><![CDATA[Correo: cemersps@gmail.com]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="752" height="23"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Citas Cancelas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="23" width="752" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="16"/>
+				</textElement>
+				<text><![CDATA[Periodo]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement x="0" y="45" width="440" height="33"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="45" width="100" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="45" width="120" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{finical}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="220" y="45" width="100" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="320" y="45" width="120" height="33"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ffinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="752" height="31" backcolor="#9B9B9B"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="32" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No. Citas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="0" width="55" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Cita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="0" width="232" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="0" width="210" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del Médico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="539" y="0" width="90" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especialidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="0" width="122" height="31"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motivo Cancelación]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="752" height="31"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="32" height="31"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{id_citas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="0" width="55" height="31"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="0" width="107" height="31"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{Nombres_PX}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="197" y="0" width="122" height="31"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{Apellidos_PX}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="0" width="210" height="31"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="539" y="0" width="90" height="31"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{Especialidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="633" y="0" width="119" height="31"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[""+$F{motivo_c}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="32" y="-31" width="1" height="62"/>
+			</line>
+			<line>
+				<reportElement x="89" y="-31" width="1" height="62"/>
+			</line>
+			<line>
+				<reportElement x="323" y="-31" width="1" height="62"/>
+			</line>
+			<line>
+				<reportElement x="536" y="-31" width="1" height="62"/>
+			</line>
+			<line>
+				<reportElement x="629" y="-31" width="1" height="62"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="27">
+			<staticText>
+				<reportElement x="369" y="7" width="161" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Elaboración de Reporte]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="633" y="7" width="63" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="696" y="7" width="56" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="7" width="90" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fechaactual}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="752" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

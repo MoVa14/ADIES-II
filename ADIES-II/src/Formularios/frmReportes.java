@@ -43,6 +43,10 @@ public class frmReportes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         pregresar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        pimprimirca = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        prerpotecc = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -112,7 +116,7 @@ public class frmReportes extends javax.swing.JFrame {
 
         preporteccm.setBackground(new java.awt.Color(247, 247, 247));
         preporteccm.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        preporteccm.setToolTipText("Reporte de Consulta por Especialidades");
+        preporteccm.setToolTipText("Demanda de Cupos en Centros Médicos");
         preporteccm.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 preporteccmMouseClicked(evt);
@@ -143,7 +147,7 @@ public class frmReportes extends javax.swing.JFrame {
 
         preportecmed.setBackground(new java.awt.Color(247, 247, 247));
         preportecmed.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        preportecmed.setToolTipText("Reporte de Consulta por Especialidades");
+        preportecmed.setToolTipText("Reporte de Consumo de Medicamentos");
         preportecmed.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 preportecmedMouseClicked(evt);
@@ -174,6 +178,7 @@ public class frmReportes extends javax.swing.JFrame {
 
         pregresar.setBackground(new java.awt.Color(247, 247, 247));
         pregresar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pregresar.setToolTipText("Regresar al Menú");
         pregresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pregresarMouseClicked(evt);
@@ -196,6 +201,69 @@ public class frmReportes extends javax.swing.JFrame {
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
 
+        pimprimirca.setBackground(new java.awt.Color(247, 247, 247));
+        pimprimirca.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pimprimirca.setToolTipText("Reporte de Consulta por Especialidades");
+        pimprimirca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pimprimircaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pimprimircaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pimprimircaMouseExited(evt);
+            }
+        });
+
+        jLabel7.setBackground(new java.awt.Color(247, 247, 247));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Reimprimir Factura de Consulta Atendida");
+        jLabel7.setToolTipText("Reimprimir Factura de Consulta Atendida");
+
+        javax.swing.GroupLayout pimprimircaLayout = new javax.swing.GroupLayout(pimprimirca);
+        pimprimirca.setLayout(pimprimircaLayout);
+        pimprimircaLayout.setHorizontalGroup(
+            pimprimircaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+        );
+        pimprimircaLayout.setVerticalGroup(
+            pimprimircaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+        );
+
+        prerpotecc.setBackground(new java.awt.Color(247, 247, 247));
+        prerpotecc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        prerpotecc.setToolTipText("Reporte de Consultas Canceladas");
+        prerpotecc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prerpoteccMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                prerpoteccMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                prerpoteccMouseExited(evt);
+            }
+        });
+
+        jLabel9.setBackground(new java.awt.Color(247, 247, 247));
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Reporte de Consultas Canceladas");
+
+        javax.swing.GroupLayout prerpoteccLayout = new javax.swing.GroupLayout(prerpotecc);
+        prerpotecc.setLayout(prerpoteccLayout);
+        prerpoteccLayout.setHorizontalGroup(
+            prerpoteccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+        );
+        prerpoteccLayout.setVerticalGroup(
+            prerpoteccLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pprincipalLayout = new javax.swing.GroupLayout(pprincipal);
         pprincipal.setLayout(pprincipalLayout);
         pprincipalLayout.setHorizontalGroup(
@@ -205,10 +273,15 @@ public class frmReportes extends javax.swing.JFrame {
                 .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(preportecmed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pregresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(preporteccm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(preportece, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(519, Short.MAX_VALUE))
+                    .addGroup(pprincipalLayout.createSequentialGroup()
+                        .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(preporteccm, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(preportece, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(48, 48, 48)
+                        .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pimprimirca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(prerpotecc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         pprincipalLayout.setVerticalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,9 +289,14 @@ public class frmReportes extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(pregresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(preportece, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(preporteccm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pprincipalLayout.createSequentialGroup()
+                        .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(preportece, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pimprimirca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(preporteccm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(prerpotecc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(preportecmed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(126, Short.MAX_VALUE))
@@ -297,6 +375,38 @@ public class frmReportes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_pregresarMouseClicked
 
+    private void pimprimircaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pimprimircaMouseClicked
+        // TODO add your handling code here:
+        frmRImprimirConsulta abrir = new frmRImprimirConsulta();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_pimprimircaMouseClicked
+
+    private void pimprimircaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pimprimircaMouseEntered
+        // TODO add your handling code here:
+        pimprimirca.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_pimprimircaMouseEntered
+
+    private void pimprimircaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pimprimircaMouseExited
+        // TODO add your handling code here:
+        pimprimirca.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_pimprimircaMouseExited
+
+    private void prerpoteccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prerpoteccMouseClicked
+        // TODO add your handling code here:
+        frmRConsultasCanceladas abrir = new frmRConsultasCanceladas();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_prerpoteccMouseClicked
+
+    private void prerpoteccMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prerpoteccMouseEntered
+        // TODO add your handling code here:
+        prerpotecc.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_prerpoteccMouseEntered
+
+    private void prerpoteccMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prerpoteccMouseExited
+        // TODO add your handling code here:
+        prerpotecc.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_prerpoteccMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -340,12 +450,18 @@ public class frmReportes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pimprimirca;
+    private javax.swing.JPanel pimprimirca1;
     private javax.swing.JPanel pprincipal;
     private javax.swing.JPanel pregresar;
     private javax.swing.JPanel preporteccm;
     private javax.swing.JPanel preportece;
     private javax.swing.JPanel preportecmed;
+    private javax.swing.JPanel prerpotecc;
     private javax.swing.JPanel psalir;
     // End of variables declaration//GEN-END:variables
 }
