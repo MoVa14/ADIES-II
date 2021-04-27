@@ -13,6 +13,8 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import Clases.Correo1;
+import Clases.Controladorcorreo;
 
 /**
  *
@@ -23,10 +25,27 @@ public class frmConfirmarCita extends javax.swing.JFrame {
     /**
      * Creates new form frmMedicamentos
      */
+    Correo1 c = new Correo1();
     public frmConfirmarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
+    }
+    public void enviarcorreo(){
+        c.setContrasea("@ierh123");
+        c.setUsuarioCorreo("ierhcm1@gmail.com");
+        c.setAsunto("Asignación de cita");
+        c.setMensaje("Paciente: "+txtcpaciente.getText()+" Fecha: "+txtcfecha.getText()+" Hora: "+txtchora.getText()+" Motivo: "+txtmotivocita.getText());
+        c.setDestino(txtccorreo.getText());
+        Controladorcorreo co = new Controladorcorreo();
+            if(co.enviarcorreo(c))
+            {
+                JOptionPane.showMessageDialog(null, "Mensaje enviado");
+            }else{
+                JOptionPane.showMessageDialog(null, "Mensaje no enviado");
+            }
+            this.dispose();
+        
     }
     
     ConexionDB cc = new ConexionDB();
@@ -221,6 +240,11 @@ public class frmConfirmarCita extends javax.swing.JFrame {
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pconfirmarLayout = new javax.swing.GroupLayout(pconfirmar);
         pconfirmar.setLayout(pconfirmarLayout);
@@ -284,11 +308,18 @@ public class frmConfirmarCita extends javax.swing.JFrame {
 
     private void pconfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconfirmarMouseClicked
         // TODO add your handling code here:
-        ingresar_sql();
-        JOptionPane.showMessageDialog(this, "Se ha Registrado y Notificado de Cita al Doctor con Éxito.");
-        this.dispose();
+        
+        
         
     }//GEN-LAST:event_pconfirmarMouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+
+        ingresar_sql();
+        JOptionPane.showMessageDialog(this, "Se ha Registrado y Notificado de Cita al Doctor con Éxito.");
+        enviarcorreo();
+        this.dispose();
+    }//GEN-LAST:event_jLabel10MouseClicked
 
     /**
      * @param args the command line arguments
