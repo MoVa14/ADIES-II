@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -33,6 +34,7 @@ public class frmConsultas extends javax.swing.JFrame {
     public frmConsultas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         model = (DefaultTableModel) t_productos.getModel();
         lblfecha.setText(cFechayHora.fecha());
         lblConsulta.setText(String.valueOf(auto_increment()));
@@ -503,6 +505,11 @@ public class frmConsultas extends javax.swing.JFrame {
         txtdescuento.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtdescuento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtdescuento.setText("0.00");
+        txtdescuento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtdescuentoKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout presumenLayout = new javax.swing.GroupLayout(presumen);
         presumen.setLayout(presumenLayout);
@@ -874,6 +881,11 @@ public class frmConsultas extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_pguardarMouseClicked
+
+    private void txtdescuentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdescuentoKeyReleased
+        // TODO add your handling code here:
+        lbltotal.setText(String.valueOf(total()));
+    }//GEN-LAST:event_txtdescuentoKeyReleased
 
     /**
      * @param args the command line arguments

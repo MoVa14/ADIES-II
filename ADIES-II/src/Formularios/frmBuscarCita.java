@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.spi.DirStateFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,7 @@ public class frmBuscarCita extends javax.swing.JFrame {
     public frmBuscarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         model = (DefaultTableModel) t_citas.getModel();
     }
 

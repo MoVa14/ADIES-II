@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -35,6 +36,7 @@ public class frmRConsultasCanceladas extends javax.swing.JFrame {
     public frmRConsultasCanceladas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
 
     }
     

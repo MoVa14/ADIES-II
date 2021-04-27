@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -35,9 +36,11 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
     public frmRImprimirConsulta() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         model = (DefaultTableModel) t_consulta.getModel();
         grupo.add(rnombre);
         grupo.add(rfecha);
+        mostrarDatos();
     }
     
     public String url="jdbc:sqlite:C://Repositorio//ADIES-II//BD//ADIES.db";
@@ -69,7 +72,7 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
     public void mostrarDatosFecha(){
         txtbnombre.setEditable(false);
         model.setRowCount(0);
-        String sql_sel = "select c.id_consulta, c.fecha, p.Nombres_PX, c.subtotal, c.descuento, c.total\n"
+        String sql_sel = "select c.id_consulta, c.fecha, p.Nombres_PX, p.Apellidos_PX , c.subtotal, c.descuento, c.total\n"
                 + "from consulta as c\n"
                 + "inner join citas as ci on ci.id_citas = c.id_citas\n"
                 + "inner join Pacientes as p on ci.ID_PX = p.ID_PX\n"
@@ -83,6 +86,36 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
                     result.getInt("id_consulta"),
                     result.getString("fecha"),
                     result.getString("Nombres_PX"),
+                    result.getString("Apellidos_PX"),
+                        
+                    result.getDouble("subtotal"),
+                    result.getDouble("descuento"),
+                    result.getDouble("total")
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        cc.cerrar();       
+    }
+    
+    public void mostrarDatos(){
+        txtbnombre.setEditable(false);
+        model.setRowCount(0);
+        String sql_sel = "select c.id_consulta, c.fecha, p.Nombres_PX, p.Apellidos_PX, c.subtotal, c.descuento, c.total\n"
+                + "from consulta as c\n"
+                + "inner join citas as ci on ci.id_citas = c.id_citas\n"
+                + "inner join Pacientes as p on ci.ID_PX = p.ID_PX;";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            while(result.next()){
+                model.addRow(new Object[]{
+                    result.getInt("id_consulta"),
+                    result.getString("fecha"),
+                    result.getString("Nombres_PX"),
+                    result.getString("Apellidos_PX"),
                     result.getDouble("subtotal"),
                     result.getDouble("descuento"),
                     result.getDouble("total")
@@ -96,7 +129,7 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
     
     public void mostrarDatosNombre(){
         model.setRowCount(0);
-        String sql_sel = "select c.id_consulta, c.fecha, p.Nombres_PX, c.subtotal, c.descuento, c.total\n"
+        String sql_sel = "select c.id_consulta, c.fecha, p.Nombres_PX, p.Apellidos_PX, c.subtotal, c.descuento, c.total\n"
                 + "from consulta as c\n"
                 + "inner join citas as ci on ci.id_citas = c.id_citas\n"
                 + "inner join Pacientes as p on ci.ID_PX = p.ID_PX\n"
@@ -110,6 +143,7 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
                     result.getInt("id_consulta"),
                     result.getString("fecha"),
                     result.getString("Nombres_PX"),
+                    result.getString("Apellidos_PX"),
                     result.getDouble("subtotal"),
                     result.getDouble("descuento"),
                     result.getDouble("total")
@@ -198,7 +232,7 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
         jPanel1.add(psalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, 40, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Demanda de Cupos en Centros Médicos");
+        jLabel2.setText("Detalle de Consultas Atendidas");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 470, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 30));
@@ -213,7 +247,7 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "No. Consulta", "Fecha", "Paciente", "Subtotal", "Descuento", "Total"
+                "No. Consulta", "Fecha", "Nombres del Paciente", "Apellidos del Paciente", "Subtotal", "Descuento", "Total"
             }
         ));
         t_consulta.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -222,6 +256,15 @@ public class frmRImprimirConsulta extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(t_consulta);
+        if (t_consulta.getColumnModel().getColumnCount() > 0) {
+            t_consulta.getColumnModel().getColumn(0).setMaxWidth(80);
+            t_consulta.getColumnModel().getColumn(1).setMaxWidth(100);
+            t_consulta.getColumnModel().getColumn(2).setMaxWidth(250);
+            t_consulta.getColumnModel().getColumn(3).setMaxWidth(250);
+            t_consulta.getColumnModel().getColumn(4).setMaxWidth(100);
+            t_consulta.getColumnModel().getColumn(5).setMaxWidth(100);
+            t_consulta.getColumnModel().getColumn(6).setMaxWidth(100);
+        }
 
         btnregresar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnregresar.setText("Atrás");

@@ -10,6 +10,7 @@ import Clases.cFechayHora;
 
 import Clases.ConexionDB;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,7 @@ public class frmPaciente extends javax.swing.JFrame {
     public frmPaciente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         this.lblfecha.setText(cFechayHora.fecha());
         txtidpaciente.setText(String.valueOf(auto_increment()));
         
@@ -174,8 +176,8 @@ public class frmPaciente extends javax.swing.JFrame {
         pdatos.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 33, 152, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("No. de Identificación");
-        pdatos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, -1, -1));
+        jLabel3.setText("DNI");
+        pdatos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, 60, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Nombres");
@@ -282,7 +284,7 @@ public class frmPaciente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtdnipx.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(txtdnipx, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 210, -1));
+        pdatos.add(txtdnipx, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 300, -1));
 
         txtfnacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
         txtfnacimiento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

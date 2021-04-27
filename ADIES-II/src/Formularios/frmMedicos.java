@@ -8,6 +8,7 @@ package Formularios;
 import Clases.ConexionDB;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,7 @@ public class frmMedicos extends javax.swing.JFrame {
     public frmMedicos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         model = (DefaultTableModel) this.t_medicos.getModel();
     }
     DefaultTableModel model;
@@ -62,15 +64,13 @@ public class frmMedicos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        pactualizar = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        pagregar = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtbuscar = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_medicos = new javax.swing.JTable();
+        btnagregar = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -130,68 +130,6 @@ public class frmMedicos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(247, 247, 247));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pactualizar.setBackground(new java.awt.Color(247, 247, 247));
-        pactualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pactualizar.setToolTipText("Actualizar Tabla de Médicos");
-        pactualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pactualizarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pactualizarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pactualizarMouseExited(evt);
-            }
-        });
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
-
-        javax.swing.GroupLayout pactualizarLayout = new javax.swing.GroupLayout(pactualizar);
-        pactualizar.setLayout(pactualizarLayout);
-        pactualizarLayout.setHorizontalGroup(
-            pactualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-        pactualizarLayout.setVerticalGroup(
-            pactualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(pactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 11, -1, -1));
-
-        pagregar.setBackground(new java.awt.Color(247, 247, 247));
-        pagregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pagregar.setToolTipText("Agregar Médico");
-        pagregar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pagregarMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pagregarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pagregarMouseExited(evt);
-            }
-        });
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
-
-        javax.swing.GroupLayout pagregarLayout = new javax.swing.GroupLayout(pagregar);
-        pagregar.setLayout(pagregarLayout);
-        pagregarLayout.setHorizontalGroup(
-            pagregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-        pagregarLayout.setVerticalGroup(
-            pagregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(pagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Ingrese Nombre Doctor a Buscar: ");
@@ -232,6 +170,42 @@ public class frmMedicos extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 830, 420));
 
+        btnagregar.setBackground(new java.awt.Color(247, 247, 247));
+        btnagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregar.png"))); // NOI18N
+        btnagregar.setToolTipText("Agregar médico");
+        btnagregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnagregarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnagregarMouseExited(evt);
+            }
+        });
+        btnagregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnagregarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 50));
+
+        btnactualizar.setBackground(new java.awt.Color(247, 247, 247));
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar.png"))); // NOI18N
+        btnactualizar.setToolTipText("Agregar médico");
+        btnactualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnactualizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnactualizarMouseExited(evt);
+            }
+        });
+        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnactualizarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 50, 50));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 850, 520));
 
         pack();
@@ -252,26 +226,6 @@ public class frmMedicos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_psalirMouseClicked
-
-    private void pagregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseEntered
-        // TODO add your handling code here:
-        pagregar.setBackground(new Color(51,204,51));
-    }//GEN-LAST:event_pagregarMouseEntered
-
-    private void pagregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseExited
-        // TODO add your handling code here:
-        pagregar.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pagregarMouseExited
-
-    private void pactualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseEntered
-        // TODO add your handling code here:
-        pactualizar.setBackground(new Color(243,106,54));
-    }//GEN-LAST:event_pactualizarMouseEntered
-
-    private void pactualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseExited
-        // TODO add your handling code here:
-        pactualizar.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pactualizarMouseExited
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -327,14 +281,27 @@ public class frmMedicos extends javax.swing.JFrame {
         cc.cerrar();
     }//GEN-LAST:event_txtbuscarKeyReleased
 
-    private void pagregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pagregarMouseClicked
+    private void btnactualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnactualizarMouseEntered
         // TODO add your handling code here:
-        frmAgregarMedico abrir = new frmAgregarMedico();
-        abrir.setVisible(true);
-        
-    }//GEN-LAST:event_pagregarMouseClicked
+        btnactualizar.setBackground(new Color(243,106,54));
+    }//GEN-LAST:event_btnactualizarMouseEntered
 
-    private void pactualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseClicked
+    private void btnactualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnactualizarMouseExited
+        // TODO add your handling code here:
+        btnactualizar.setBackground((new Color(247,247,247)));
+    }//GEN-LAST:event_btnactualizarMouseExited
+
+    private void btnagregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnagregarMouseEntered
+        // TODO add your handling code here:
+        btnagregar.setBackground(new Color(51,204,51));
+    }//GEN-LAST:event_btnagregarMouseEntered
+
+    private void btnagregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnagregarMouseExited
+        // TODO add your handling code here:
+        btnagregar.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btnagregarMouseExited
+
+    private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
         // TODO add your handling code here:
         model.setRowCount(0);
         String sql_sel="select Nombre, Celular, Correo, Especialidad, No_Colegiacion from Medicos order by Nombre";
@@ -354,8 +321,14 @@ public class frmMedicos extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "El Error es: "+e.toString());
         }
-        cc.cerrar();
-    }//GEN-LAST:event_pactualizarMouseClicked
+        cc.cerrar();        
+    }//GEN-LAST:event_btnactualizarActionPerformed
+
+    private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
+        // TODO add your handling code here:
+        frmAgregarMedico abrir = new frmAgregarMedico();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btnagregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,18 +366,16 @@ public class frmMedicos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btnactualizar;
+    public static javax.swing.JButton btnagregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPanel pactualizar;
-    private javax.swing.JPanel pagregar;
     private javax.swing.JPanel psalir;
     private javax.swing.JTable t_medicos;
     private javax.swing.JTextField txtbuscar;

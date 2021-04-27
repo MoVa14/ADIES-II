@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import Clases.CentroMedico;
 import Clases.ConexionDB;
 import Clases.cFechayHora;
 import static Formularios.frmConfirmarCita.txtccorreo;
@@ -15,6 +16,7 @@ import static Formularios.frmConfirmarCita.txtcmedico;
 import static Formularios.frmConfirmarCita.txtcpaciente;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +32,7 @@ public class frmCitas extends javax.swing.JFrame {
     public frmCitas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         model = (DefaultTableModel) t_citas.getModel();
         txtidcita.setText(String.valueOf(auto_increment()));
         lblpendientes.setText(String.valueOf(citaspendientes())+" / "+String.valueOf(citas()));
@@ -205,7 +208,7 @@ public class frmCitas extends javax.swing.JFrame {
         int idMedico = Integer.parseInt(txtidmed.getText());
         String hora = String.valueOf(cbhora.getSelectedItem());
         String motivo = txtamcita.getText().toString();
-        int idcm = 1;
+        int idcm = CentroMedico.getId_centro();
         String estado = "PENDIENTE";
         String sql_insert = "insert into citas\n"
                 + "(ID_PX,ID_Medico,fecha,hora,id_CentroMedico,motivo,estado) \n"
@@ -461,6 +464,7 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Paciente");
 
+        txtpaciente.setEditable(false);
         txtpaciente.setBackground(new java.awt.Color(0, 0, 0));
         txtpaciente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtpaciente.setForeground(new java.awt.Color(255, 255, 255));
@@ -469,6 +473,7 @@ public class frmCitas extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Médico");
 
+        txtmedico.setEditable(false);
         txtmedico.setBackground(new java.awt.Color(0, 0, 0));
         txtmedico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtmedico.setForeground(new java.awt.Color(255, 255, 255));
@@ -542,11 +547,13 @@ public class frmCitas extends javax.swing.JFrame {
         jfechacita.setDateFormatString("dd-MM-yyyy");
         jfechacita.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        txtidpx.setEditable(false);
         txtidpx.setBackground(new java.awt.Color(0, 0, 0));
         txtidpx.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtidpx.setForeground(new java.awt.Color(255, 255, 255));
         txtidpx.setToolTipText("Digite el Nombre del Paciente");
 
+        txtidmed.setEditable(false);
         txtidmed.setBackground(new java.awt.Color(0, 0, 0));
         txtidmed.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtidmed.setForeground(new java.awt.Color(255, 255, 255));

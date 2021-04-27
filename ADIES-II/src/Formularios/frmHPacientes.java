@@ -8,6 +8,7 @@ package Formularios;
 import java.awt.Color;
 import java.sql.ResultSet;
 import Clases.ConexionDB;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,6 +25,7 @@ public class frmHPacientes extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         model = (DefaultTableModel) t_pacientes.getModel();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
     }
     ConexionDB cc = new ConexionDB();
     DefaultTableModel model;
@@ -253,6 +255,26 @@ public class frmHPacientes extends javax.swing.JFrame {
 
     private void pactualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseClicked
         // TODO add your handling code here:
+        String sql_sel="select  No_DNIPX, Nombres_PX, Apellidos_PX, Celular_PX, Sexo_PX, TSangre_PX, FNacimiento_PX from Pacientes order by Nombres_PX";
+        ResultSet result = null;
+        cc.conectar();
+        result = cc.seleccionar(sql_sel);
+        try {
+            while (result.next()){
+                model.addRow(new Object[]{
+                    result.getString("No_DNIPX"),
+                    result.getString("Nombres_PX"),
+                    result.getString("Apellidos_PX"),
+                    result.getString("Celular_PX"),
+                    result.getString("Sexo_PX"),
+                    result.getString("TSangre_PX"),
+                    result.getString("FNacimiento_PX")
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El Error es: "+e.toString());
+        }
+        cc.cerrar();
         
     }//GEN-LAST:event_pactualizarMouseClicked
 

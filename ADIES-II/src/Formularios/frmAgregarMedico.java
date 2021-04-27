@@ -8,6 +8,7 @@ package Formularios;
 import Clases.ConexionDB;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,7 @@ public class frmAgregarMedico extends javax.swing.JFrame {
     public frmAgregarMedico() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         txtid.setText(String.valueOf(auto_increment()));
     }
     

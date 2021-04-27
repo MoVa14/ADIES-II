@@ -8,6 +8,7 @@ package Formularios;
 import Clases.ConexionDB;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,7 @@ public class frmMedicamentos extends javax.swing.JFrame {
     public frmMedicamentos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         model = (DefaultTableModel) this.t_medicamentos.getModel();
     }
     DefaultTableModel model;

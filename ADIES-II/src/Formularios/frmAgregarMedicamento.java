@@ -9,6 +9,7 @@ import Clases.ConexionDB;
 import Clases.cFechayHora;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +24,7 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
     public frmAgregarMedicamento() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         txtid.setText(String.valueOf(auto_increment()));
     }
     

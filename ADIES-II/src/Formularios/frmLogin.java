@@ -5,11 +5,15 @@
  */
 package Formularios;
 
+import Clases.CentroMedico;
 import Clases.ConexionDB;
-import static Formularios.frmCitas.txtidmed;
+import Clases.IconoForm;
+import Clases.Login;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -24,27 +28,50 @@ public class frmLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setOpacity(0.9f);
+        setIconImage(new ImageIcon(getClass().getResource(IconoForm.url())).getImage());
     }
     
     ConexionDB cc = new ConexionDB();
+    Login ll = new Login();
+    frmPrincipal abrir = new frmPrincipal();
     
-    public String obtenerUsuarioyContrasena(){
-        String buser = txtuser.getText();
-        String bpass = txtpass.getText();
+    public void obtenerUsuarioyContrasena(String usuario, String contrasena){
         ResultSet result = null;
         String sql_sel = "select user, pass, nombre, cargo\n"
                 + "from usuarios\n"
-                + "where user='"+buser+"' and pass='"+bpass+"';";
+                + "where user='"+usuario+"' and pass='"+contrasena+"';";
         cc.conectar();
         result = cc.seleccionar(sql_sel);
         try {
             if (result.next()){
-                frmPrincipal abrir = new frmPrincipal();
-                JOptionPane.showMessageDialog(this, "Bienvenido "+result.getString("nombre"));
-                frmPrincipal.lblindouser.setText(result.getString("nombre"));
-                frmPrincipal.lblcargo.setText(result.getString("cargo"));
-                abrir.setVisible(true);
-                this.dispose();
+                usuario = result.getString("user");
+                contrasena = result.getString("pass");
+                ll.setDbonombre(result.getString("nombre"));
+                ll.setDbocargo(result.getString("cargo"));
+                if (usuario != null && contrasena != null){
+                    switch (ll.getDbocargo()){
+                        case "ADMINISTRADOR":
+                            JOptionPane.showMessageDialog(null, "Bienvenido "+ll.getDbonombre());
+                            frmPrincipal.lblnombre.setText(ll.getDbonombre());
+                            frmPrincipal.lblcargo.setText(ll.getDbocargo());
+                            frmPrincipal.lblcentro.setText(CentroMedico.getNombre_centro());
+                            abrir.setVisible(true);
+                            this.setVisible(false);
+                            break;
+                            
+                        case "SECRETARIA":
+                            JOptionPane.showMessageDialog(null, "Bienvenido "+ll.getDbonombre());
+                            frmPrincipal.lblnombre.setText(ll.getDbonombre());
+                            frmPrincipal.lblcargo.setText(ll.getDbocargo());
+                            frmPrincipal.lblcentro.setText(CentroMedico.getNombre_centro());
+                            frmPrincipal.btnconsulta.setEnabled(false);
+                            frmPrincipal.btnmedicos.setEnabled(false);
+                            frmPrincipal.btnreportes.setEnabled(false);
+                            abrir.setVisible(true);
+                            this.setVisible(false);
+                            break;
+                    }
+                }
             }
             else{
                 JOptionPane.showMessageDialog(this, "Usuario ó Contraseña incorrecta.");
@@ -53,8 +80,6 @@ public class frmLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString());
         }
         cc.cerrar();
-        
-        return buser;
     }
 
     
@@ -83,6 +108,8 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtpass = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cbcentromedico = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -151,15 +178,22 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Centro Médico");
+
+        cbcentromedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbcentromedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar un Centro Médico", "CEMER SPS", "CEMER INTIBUCA" }));
+
         javax.swing.GroupLayout pprincipalLayout = new javax.swing.GroupLayout(pprincipal);
         pprincipal.setLayout(pprincipalLayout);
         pprincipalLayout.setHorizontalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
             .addGroup(pprincipalLayout.createSequentialGroup()
-                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pprincipalLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pprincipalLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,49 +201,57 @@ public class frmLogin extends javax.swing.JFrame {
                                 .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4)))
                     .addGroup(pprincipalLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(33, 33, 33)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pprincipalLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7))
+                    .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pprincipalLayout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pprincipalLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pprincipalLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pprincipalLayout.createSequentialGroup()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pprincipalLayout.createSequentialGroup()
-                                    .addGap(29, 29, 29)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbcentromedico, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pprincipalLayout.setVerticalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pprincipalLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pprincipalLayout.createSequentialGroup()
+                        .addComponent(cbcentromedico, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                        .addGap(2, 2, 2)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtuser, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                    .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(txtpass))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         getContentPane().add(pprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 390, 400));
@@ -234,8 +276,15 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        obtenerUsuarioyContrasena();
-        
+        if (cbcentromedico.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un centro médico.");
+        }
+        else{
+            CentroMedico.setId_centro(cbcentromedico.getSelectedIndex());
+            CentroMedico.setNombre_centro(cbcentromedico.getSelectedItem().toString());
+            obtenerUsuarioyContrasena(txtuser.getText(),txtpass.getText());
+        }
+                
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -264,9 +313,6 @@ public class frmLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -277,6 +323,7 @@ public class frmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JComboBox<String> cbcentromedico;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -285,6 +332,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

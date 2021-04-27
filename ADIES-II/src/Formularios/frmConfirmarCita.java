@@ -11,6 +11,7 @@ import static Formularios.frmCitas.txtidpx;
 import static Formularios.frmConsultas.txtidcita;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,7 @@ public class frmConfirmarCita extends javax.swing.JFrame {
     public frmConfirmarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
     }
     
     ConexionDB cc = new ConexionDB();
@@ -57,9 +59,9 @@ public class frmConfirmarCita extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         psalir = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         pprincipal = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -91,6 +93,10 @@ public class frmConfirmarCita extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(133, 156, 206));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Confirmación de Cita");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 30));
+
         psalir.setBackground(new java.awt.Color(133, 156, 206));
         psalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,13 +115,9 @@ public class frmConfirmarCita extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/close_peq.png"))); // NOI18N
         psalir.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
 
-        jPanel1.add(psalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 40, 30));
+        jPanel1.add(psalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 40, 30));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Confirmación de Cita");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 470, 30));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 30));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 30));
 
         pprincipal.setBackground(new java.awt.Color(247, 247, 247));
         pprincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,13 +156,13 @@ public class frmConfirmarCita extends javax.swing.JFrame {
         txtcpaciente.setBackground(new java.awt.Color(0, 0, 0));
         txtcpaciente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtcpaciente.setForeground(new java.awt.Color(255, 255, 255));
-        pprincipal.add(txtcpaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 70, 300, -1));
+        pprincipal.add(txtcpaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 70, 360, -1));
 
         txtcmedico.setEditable(false);
         txtcmedico.setBackground(new java.awt.Color(0, 0, 0));
         txtcmedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtcmedico.setForeground(new java.awt.Color(255, 255, 255));
-        pprincipal.add(txtcmedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 104, 300, -1));
+        pprincipal.add(txtcmedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 104, 360, -1));
 
         txtcespecialidad1.setEditable(false);
         txtcespecialidad1.setBackground(new java.awt.Color(0, 0, 0));
@@ -236,7 +238,7 @@ public class frmConfirmarCita extends javax.swing.JFrame {
         );
 
         pprincipal.add(pconfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 297, -1, -1));
-        pprincipal.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 500, 10));
+        pprincipal.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 550, 10));
 
         txtcidp.setEditable(false);
         txtcidp.setBackground(new java.awt.Color(0, 0, 0));
@@ -250,7 +252,7 @@ public class frmConfirmarCita extends javax.swing.JFrame {
         txtcidmed.setForeground(new java.awt.Color(255, 255, 255));
         pprincipal.add(txtcidmed, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 107, 38, -1));
 
-        getContentPane().add(pprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 520, 400));
+        getContentPane().add(pprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 570, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

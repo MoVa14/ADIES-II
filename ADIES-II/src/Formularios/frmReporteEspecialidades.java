@@ -9,6 +9,7 @@ import Clases.ConexionDB;
 import Clases.cFechayHora;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -29,6 +30,7 @@ public class frmReporteEspecialidades extends javax.swing.JFrame {
     public frmReporteEspecialidades() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         model = (DefaultTableModel) t_especialidades.getModel();
     }
     

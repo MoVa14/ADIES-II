@@ -5,7 +5,12 @@
  */
 package Formularios;
 
+import Clases.CentroMedico;
+import Clases.Login;
 import java.awt.Color;
+import java.awt.Component;
+import javax.swing.ImageIcon;
+import net.sf.jasperreports.swing.JRViewerEvent;
 
 /**
  *
@@ -16,10 +21,15 @@ public class frmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form frmPrincipal
      */
+    Login ll = new Login();
+    
     public frmPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,24 +46,19 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblindouser = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
         lblcargo = new javax.swing.JLabel();
         pcerrars = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        lblcentro = new javax.swing.JLabel();
         pprincipal = new javax.swing.JPanel();
-        pcita = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        ppaciente = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        pmedico = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        pconsulta = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        preportes = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        pmedicamentos = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        btncitas = new javax.swing.JButton();
+        btnpacientes = new javax.swing.JButton();
+        btnmedicos = new javax.swing.JButton();
+        btnconsulta = new javax.swing.JButton();
+        btnmedicamentos = new javax.swing.JButton();
+        btnreportes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -117,9 +122,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/user.png"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 57));
 
-        lblindouser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblindouser.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel2.add(lblindouser, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 0, 355, 30));
+        lblnombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblnombre.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanel2.add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 0, 355, 30));
 
         lblcargo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel2.add(lblcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 36, 149, 21));
@@ -155,221 +160,145 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jPanel2.add(pcerrars, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, 170, 60));
 
+        lblcentro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblcentro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblcentro, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 110, 30));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 800, 60));
 
         pprincipal.setBackground(new java.awt.Color(247, 247, 247));
-
-        pcita.setBackground(new java.awt.Color(247, 247, 247));
-        pcita.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pcita.setToolTipText("Cita");
-        pcita.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pcitaMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pcitaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pcitaMouseExited(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
-        jLabel5.setText(" Cita");
-
-        javax.swing.GroupLayout pcitaLayout = new javax.swing.GroupLayout(pcita);
-        pcita.setLayout(pcitaLayout);
-        pcitaLayout.setHorizontalGroup(
-            pcitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-        );
-        pcitaLayout.setVerticalGroup(
-            pcitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo_red.png"))); // NOI18N
 
-        ppaciente.setBackground(new java.awt.Color(247, 247, 247));
-        ppaciente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ppaciente.setToolTipText("Paciente");
-        ppaciente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ppacienteMouseClicked(evt);
-            }
+        btncitas.setBackground(new java.awt.Color(247, 247, 247));
+        btncitas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btncitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
+        btncitas.setText(" Citas");
+        btncitas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ppacienteMouseEntered(evt);
+                btncitasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ppacienteMouseExited(evt);
+                btncitasMouseExited(evt);
+            }
+        });
+        btncitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncitasActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/patient.png"))); // NOI18N
-        jLabel6.setText(" Paciente");
-
-        javax.swing.GroupLayout ppacienteLayout = new javax.swing.GroupLayout(ppaciente);
-        ppaciente.setLayout(ppacienteLayout);
-        ppacienteLayout.setHorizontalGroup(
-            ppacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-        );
-        ppacienteLayout.setVerticalGroup(
-            ppacienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pmedico.setBackground(new java.awt.Color(247, 247, 247));
-        pmedico.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pmedico.setToolTipText("Médico");
-        pmedico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pmedicoMouseClicked(evt);
-            }
+        btnpacientes.setBackground(new java.awt.Color(247, 247, 247));
+        btnpacientes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnpacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/patient.png"))); // NOI18N
+        btnpacientes.setText(" Pacientes");
+        btnpacientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pmedicoMouseEntered(evt);
+                btnpacientesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pmedicoMouseExited(evt);
+                btnpacientesMouseExited(evt);
+            }
+        });
+        btnpacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpacientesActionPerformed(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicos.png"))); // NOI18N
-        jLabel7.setText(" Médicos\n");
-
-        javax.swing.GroupLayout pmedicoLayout = new javax.swing.GroupLayout(pmedico);
-        pmedico.setLayout(pmedicoLayout);
-        pmedicoLayout.setHorizontalGroup(
-            pmedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-        );
-        pmedicoLayout.setVerticalGroup(
-            pmedicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-        );
-
-        pconsulta.setBackground(new java.awt.Color(247, 247, 247));
-        pconsulta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pconsulta.setToolTipText("Consulta/Facturación");
-        pconsulta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pconsultaMouseClicked(evt);
-            }
+        btnmedicos.setBackground(new java.awt.Color(247, 247, 247));
+        btnmedicos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnmedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicos.png"))); // NOI18N
+        btnmedicos.setText(" Médicos");
+        btnmedicos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pconsultaMouseEntered(evt);
+                btnmedicosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pconsultaMouseExited(evt);
+                btnmedicosMouseExited(evt);
+            }
+        });
+        btnmedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmedicosActionPerformed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
-        jLabel8.setText(" Consultas / Facturación");
-
-        javax.swing.GroupLayout pconsultaLayout = new javax.swing.GroupLayout(pconsulta);
-        pconsulta.setLayout(pconsultaLayout);
-        pconsultaLayout.setHorizontalGroup(
-            pconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-        );
-        pconsultaLayout.setVerticalGroup(
-            pconsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-        );
-
-        preportes.setBackground(new java.awt.Color(247, 247, 247));
-        preportes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        preportes.setToolTipText("Reportes");
-        preportes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                preportesMouseClicked(evt);
-            }
+        btnconsulta.setBackground(new java.awt.Color(247, 247, 247));
+        btnconsulta.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnconsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
+        btnconsulta.setText(" Consulta");
+        btnconsulta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                preportesMouseEntered(evt);
+                btnconsultaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                preportesMouseExited(evt);
+                btnconsultaMouseExited(evt);
+            }
+        });
+        btnconsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnconsultaActionPerformed(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reporte.png"))); // NOI18N
-        jLabel9.setText(" Reportes");
-
-        javax.swing.GroupLayout preportesLayout = new javax.swing.GroupLayout(preportes);
-        preportes.setLayout(preportesLayout);
-        preportesLayout.setHorizontalGroup(
-            preportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-        );
-        preportesLayout.setVerticalGroup(
-            preportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pmedicamentos.setBackground(new java.awt.Color(247, 247, 247));
-        pmedicamentos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        pmedicamentos.setToolTipText("Almacén");
-        pmedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pmedicamentosMouseClicked(evt);
-            }
+        btnmedicamentos.setBackground(new java.awt.Color(247, 247, 247));
+        btnmedicamentos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnmedicamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicamento.png"))); // NOI18N
+        btnmedicamentos.setText(" Almacen");
+        btnmedicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pmedicamentosMouseEntered(evt);
+                btnmedicamentosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pmedicamentosMouseExited(evt);
+                btnmedicamentosMouseExited(evt);
+            }
+        });
+        btnmedicamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmedicamentosActionPerformed(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicamento.png"))); // NOI18N
-        jLabel10.setText("Almacén");
-
-        javax.swing.GroupLayout pmedicamentosLayout = new javax.swing.GroupLayout(pmedicamentos);
-        pmedicamentos.setLayout(pmedicamentosLayout);
-        pmedicamentosLayout.setHorizontalGroup(
-            pmedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-        );
-        pmedicamentosLayout.setVerticalGroup(
-            pmedicamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        btnreportes.setBackground(new java.awt.Color(247, 247, 247));
+        btnreportes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnreportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reporte.png"))); // NOI18N
+        btnreportes.setText(" Reportes");
+        btnreportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnreportesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnreportesMouseExited(evt);
+            }
+        });
+        btnreportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreportesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pprincipalLayout = new javax.swing.GroupLayout(pprincipal);
         pprincipal.setLayout(pprincipalLayout);
         pprincipalLayout.setHorizontalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pprincipalLayout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
-                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pprincipalLayout.createSequentialGroup()
-                        .addComponent(pcita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ppaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pmedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pprincipalLayout.createSequentialGroup()
-                        .addComponent(pconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pmedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(preportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(91, 91, 91))
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pprincipalLayout.createSequentialGroup()
+                .addContainerGap(90, Short.MAX_VALUE)
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btncitas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnconsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnmedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnpacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnreportes, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnmedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(95, 95, 95))
         );
         pprincipalLayout.setVerticalGroup(
             pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,16 +306,17 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pcita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ppaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pmedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btncitas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnpacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnmedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pconsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(preportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pmedicamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(55, 55, 55))
+                .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnconsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnmedicamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnreportes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(77, 77, 77))
         );
 
         getContentPane().add(pprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 800, 440));
@@ -409,102 +339,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_psalirMouseClicked
 
-    private void preportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preportesMouseExited
-        // TODO add your handling code here:
-        preportes.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_preportesMouseExited
-
-    private void preportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preportesMouseEntered
-        // TODO add your handling code here:
-        this.preportes.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_preportesMouseEntered
-
-    private void pconsultaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconsultaMouseExited
-        // TODO add your handling code here:
-        pconsulta.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pconsultaMouseExited
-
-    private void pconsultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconsultaMouseEntered
-        // TODO add your handling code here:
-        this.pconsulta.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_pconsultaMouseEntered
-
-    private void pmedicoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseExited
-        // TODO add your handling code here:
-        pmedico.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pmedicoMouseExited
-
-    private void pmedicoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseEntered
-        // TODO add your handling code here:
-        this.pmedico.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_pmedicoMouseEntered
-
-    private void ppacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseExited
-        // TODO add your handling code here:
-        this.ppaciente.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_ppacienteMouseExited
-
-    private void ppacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseEntered
-        // TODO add your handling code here:
-        this.ppaciente.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_ppacienteMouseEntered
-
-    private void ppacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ppacienteMouseClicked
-        // TODO add your handling code here:
-        frmPaciente abrir = new frmPaciente();
-        abrir.setVisible(true);
-    }//GEN-LAST:event_ppacienteMouseClicked
-
-    private void pcitaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseExited
-        // TODO add your handling code here:
-        this.pcita.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pcitaMouseExited
-
-    private void pcitaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseEntered
-        // TODO add your handling code here:
-        this.pcita.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_pcitaMouseEntered
-
-    private void pcitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcitaMouseClicked
-        // TODO add your handling code here:
-        frmCitas abrir = new frmCitas();
-        abrir.setVisible(true);
-    }//GEN-LAST:event_pcitaMouseClicked
-
-    private void pmedicamentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicamentosMouseEntered
-        // TODO add your handling code here:
-        pmedicamentos.setBackground(new Color(133,156,206));
-    }//GEN-LAST:event_pmedicamentosMouseEntered
-
-    private void pmedicamentosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicamentosMouseExited
-        // TODO add your handling code here:
-        pmedicamentos.setBackground(new Color(247,247,247));
-    }//GEN-LAST:event_pmedicamentosMouseExited
-
-    private void pmedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicoMouseClicked
-        // TODO add your handling code here:
-        frmMedicos abrir = new frmMedicos();
-        abrir.setVisible(true);
-    }//GEN-LAST:event_pmedicoMouseClicked
-
-    private void pmedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmedicamentosMouseClicked
-        // TODO add your handling code here:
-        frmMedicamentos abrir = new frmMedicamentos();
-        abrir.setVisible(true);
-    }//GEN-LAST:event_pmedicamentosMouseClicked
-
-    private void preportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_preportesMouseClicked
-        // TODO add your handling code here:
-        frmReportes abrir = new frmReportes();
-        abrir.setVisible(true);
-    }//GEN-LAST:event_preportesMouseClicked
-
-    private void pconsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pconsultaMouseClicked
-        // TODO add your handling code here:
-        frmConsultas abrir = new frmConsultas();
-        abrir.setVisible(true);
-    }//GEN-LAST:event_pconsultaMouseClicked
-
     private void pcerrarsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcerrarsMouseEntered
         // TODO add your handling code here:
         pcerrars.setBackground(new Color(133,156,206));
@@ -519,8 +353,104 @@ public class frmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmLogin abrir = new frmLogin();
         abrir.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_pcerrarsMouseClicked
+
+    private void btncitasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btncitasMouseEntered
+        // TODO add your handling code here:
+        btncitas.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_btncitasMouseEntered
+
+    private void btncitasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btncitasMouseExited
+        // TODO add your handling code here:
+        btncitas.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btncitasMouseExited
+
+    private void btncitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncitasActionPerformed
+        // TODO add your handling code here:
+        frmCitas abrir = new frmCitas();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btncitasActionPerformed
+
+    private void btnpacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpacientesActionPerformed
+        // TODO add your handling code here:
+        frmPaciente abrir = new frmPaciente();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btnpacientesActionPerformed
+
+    private void btnpacientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnpacientesMouseEntered
+        // TODO add your handling code here:
+        btnpacientes.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_btnpacientesMouseEntered
+
+    private void btnmedicosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmedicosMouseEntered
+        // TODO add your handling code here:
+        btnmedicos.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_btnmedicosMouseEntered
+
+    private void btnconsultaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconsultaMouseEntered
+        // TODO add your handling code here:
+        btnconsulta.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_btnconsultaMouseEntered
+
+    private void btnmedicamentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmedicamentosMouseEntered
+        // TODO add your handling code here:
+        btnmedicamentos.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_btnmedicamentosMouseEntered
+
+    private void btnreportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreportesMouseEntered
+        // TODO add your handling code here:
+        btnreportes.setBackground(new Color(133,156,206));
+    }//GEN-LAST:event_btnreportesMouseEntered
+
+    private void btnpacientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnpacientesMouseExited
+        // TODO add your handling code here:
+        btnpacientes.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btnpacientesMouseExited
+
+    private void btnmedicosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmedicosMouseExited
+        // TODO add your handling code here:
+        btnmedicos.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btnmedicosMouseExited
+
+    private void btnconsultaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnconsultaMouseExited
+        // TODO add your handling code here:
+        btnconsulta.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btnconsultaMouseExited
+
+    private void btnmedicamentosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnmedicamentosMouseExited
+        // TODO add your handling code here:
+        btnmedicamentos.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btnmedicamentosMouseExited
+
+    private void btnreportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreportesMouseExited
+        // TODO add your handling code here:
+        btnreportes.setBackground(new Color(247,247,247));
+    }//GEN-LAST:event_btnreportesMouseExited
+
+    private void btnmedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmedicosActionPerformed
+        // TODO add your handling code here:
+        frmMedicos abrir = new frmMedicos();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btnmedicosActionPerformed
+
+    private void btnconsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultaActionPerformed
+        // TODO add your handling code here:
+        frmConsultas abrir = new frmConsultas();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btnconsultaActionPerformed
+
+    private void btnmedicamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmedicamentosActionPerformed
+        // TODO add your handling code here:
+        frmMedicamentos abrir = new frmMedicamentos();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btnmedicamentosActionPerformed
+
+    private void btnreportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreportesActionPerformed
+        // TODO add your handling code here:
+        frmReportes abrir = new frmReportes();
+        abrir.setVisible(true);
+    }//GEN-LAST:event_btnreportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -558,29 +488,24 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton btncitas;
+    public static javax.swing.JButton btnconsulta;
+    public static javax.swing.JButton btnmedicamentos;
+    public static javax.swing.JButton btnmedicos;
+    public static javax.swing.JButton btnpacientes;
+    public static javax.swing.JButton btnreportes;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JLabel lblcargo;
-    public static javax.swing.JLabel lblindouser;
+    public static javax.swing.JLabel lblcentro;
+    public static javax.swing.JLabel lblnombre;
     private javax.swing.JPanel pcerrars;
-    private javax.swing.JPanel pcita;
-    private javax.swing.JPanel pconsulta;
-    private javax.swing.JPanel pmedicamentos;
-    private javax.swing.JPanel pmedico;
-    private javax.swing.JPanel ppaciente;
     private javax.swing.JPanel pprincipal;
-    private javax.swing.JPanel preportes;
     private javax.swing.JPanel psalir;
     // End of variables declaration//GEN-END:variables
 }

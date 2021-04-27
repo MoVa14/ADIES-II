@@ -8,6 +8,7 @@ package Formularios;
 import Clases.ConexionDB;
 import static Formularios.frmConsultas.txtidcita;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,7 @@ public class frmCancelarCita extends javax.swing.JFrame {
     public frmCancelarCita() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
     }
     
     ConexionDB cc = new ConexionDB();
