@@ -11,6 +11,7 @@ import Clases.IconoForm;
 import Clases.Login;
 import java.awt.Color;
 import java.sql.ResultSet;
+import javax.sound.midi.SysexMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -182,7 +183,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel8.setText("Centro Médico");
 
         cbcentromedico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbcentromedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar un Centro Médico", "CEMER SPS", "CEMER INTIBUCA" }));
+        cbcentromedico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir una Opción:", "CEMER SPS", "CEMER INTIBUCA" }));
 
         javax.swing.GroupLayout pprincipalLayout = new javax.swing.GroupLayout(pprincipal);
         pprincipal.setLayout(pprincipalLayout);
@@ -271,13 +272,17 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void psalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_psalirMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (cbcentromedico.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un centro médico.");
+        }else if(txtuser.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe llenar el campo del usuario.");
+        }else if(txtpass.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe llenar el campo de la contraseña.");
         }
         else{
             CentroMedico.setId_centro(cbcentromedico.getSelectedIndex());

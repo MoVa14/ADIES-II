@@ -9,6 +9,7 @@ import Clases.ConexionDB;
 import Clases.cFechayHora;
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -27,29 +28,29 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         txtid.setText(String.valueOf(auto_increment()));
     }
-    
+
     ConexionDB cc = new ConexionDB();
     cFechayHora fecha = new cFechayHora();
-    
-    public int auto_increment(){
+
+    public int auto_increment() {
         String sql_sel = "select max(id) from medicamentos";
         ResultSet result = null;
         cc.conectar();
         result = cc.seleccionar(sql_sel);
-        int id_px=0;
+        int id_px = 0;
         try {
-            while (result.next()){
+            while (result.next()) {
                 id_px = result.getInt(1);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "el error: "+e.toString());
+            JOptionPane.showMessageDialog(null, "el error: " + e.toString());
             //System.out.println(e.toString());
         }
         cc.cerrar();
-        return ((id_px)+1);
+        return ((id_px) + 1);
     }
-    
-    public void limpiar(){
+
+    public void limpiar() {
         txtid.setText(String.valueOf(auto_increment()));
         txtnom_com.setText("");
         txtlab.setText("");
@@ -91,6 +92,13 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
         jfvencimiento = new com.toedter.calendar.JDateChooser();
         pguardar = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -117,7 +125,7 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
         psalir.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Registro de Médicos");
+        jLabel2.setText("Registro de Medicamentos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,8 +133,8 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 424, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
                 .addComponent(psalir, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -237,6 +245,34 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
 
         pdatos.add(pguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 60, 50));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("*");
+        pdatos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, 10));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("*");
+        pdatos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, -1, 10));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("*");
+        pdatos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, 10));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("*");
+        pdatos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, 10));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("*");
+        pdatos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, -1, 10));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("*");
+        pdatos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, 10));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel18.setText("*");
+        pdatos.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, -1, 10));
+
         jPanel3.add(pdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 24, 656, 251));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 680, 290));
@@ -251,7 +287,7 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
 
     private void psalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseExited
         // TODO add your handling code here:
-        psalir.setBackground(new Color (133,156,206));
+        psalir.setBackground(new Color(133, 156, 206));
     }//GEN-LAST:event_psalirMouseExited
 
     private void psalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseClicked
@@ -261,28 +297,37 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
 
     private void pguardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseEntered
         // TODO add your handling code here:
-        pguardar.setBackground(new Color(51,204,51));
+        pguardar.setBackground(new Color(51, 204, 51));
     }//GEN-LAST:event_pguardarMouseEntered
 
     private void pguardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseExited
         // TODO add your handling code here:
-        pguardar.setBackground(new Color(247,247,247));
+        pguardar.setBackground(new Color(247, 247, 247));
     }//GEN-LAST:event_pguardarMouseExited
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
-        if (txtnom_com.getText().isEmpty() || txtlab.getText().isEmpty() || txtcompuesto.getText().isEmpty() || txtestante.getText().isEmpty() || txtexistencia.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Faltan datos por ingresar, revisar que todos los campos se encuentren llenos en el formulario.");
-        }
-        else{
-            String sql_insert="insert into medicamentos (nombre_com, laboratorio, compuesto, estante, existencias, f_elaboracion, f_vencimiento) values (upper('"+ txtnom_com.getText().toString() +"'),upper('"+ txtlab.getText().toString() +"'),upper('"+ txtcompuesto.getText().toString() +"'),upper('"+ txtestante.getText().toString() +"'),upper('"+ txtexistencia.getText().toString() +"'),'"+ fecha.ffecha(jfelaboracion) +"','"+ fecha.ffecha(jfvencimiento) +"')";
+        Date fe = jfelaboracion.getDate();
+        Date fv = jfvencimiento.getDate();
+        if (txtnom_com.getText().isEmpty()
+                || txtlab.getText().isEmpty()
+                || txtcompuesto.getText().isEmpty()
+                || txtestante.getText().isEmpty()
+                || txtexistencia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Faltan ingresaro datos, revisar los campos del nombre comercial, laboratorio, compuesto, estante y cantidad esten llenos.");
+        }else if(fe == null){
+            JOptionPane.showMessageDialog(this, "Falta ingresar la fecha de elaboración del medicamento.");
+        }else if(fv == null){
+            JOptionPane.showMessageDialog(this, "Falta ingresar la fecha de vencimiento del medicamento.");
+        }else{
+            String sql_insert = "insert into medicamentos (nombre_com, laboratorio, compuesto, estante, existencias, f_elaboracion, f_vencimiento) values (upper('" + txtnom_com.getText().toString() + "'),upper('" + txtlab.getText().toString() + "'),upper('" + txtcompuesto.getText().toString() + "')," + txtestante.getText() + "," + txtexistencia.getText() + ",'" + fecha.ffecha(jfelaboracion) + "','" + fecha.ffecha(jfvencimiento) + "')";
             cc.conectar();
             cc.insertar(sql_insert);
             cc.cerrar();
             limpiar();
             JOptionPane.showMessageDialog(null, "Se ha ingresado exitosamente el medicamento.");
         }
-        
+
     }//GEN-LAST:event_pguardarMouseClicked
 
     /**
@@ -323,6 +368,7 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -330,9 +376,15 @@ public class frmAgregarMedicamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private com.toedter.calendar.JDateChooser jfelaboracion;

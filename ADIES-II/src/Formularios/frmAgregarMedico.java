@@ -54,7 +54,7 @@ public class frmAgregarMedico extends javax.swing.JFrame {
         txtdireccion.setText("");
         txtcelular.setText("");
         txtcorreo.setText("");
-        txtespecialidad.setText("");
+        jComboBox1.setSelectedIndex(0);
         txtcolegiacion.setText("");
     }
 
@@ -86,9 +86,16 @@ public class frmAgregarMedico extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtcorreo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtespecialidad = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtcolegiacion = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         pguardar = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
 
@@ -155,7 +162,7 @@ public class frmAgregarMedico extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("DNI:");
-        pdatos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 60, 74, 26));
+        pdatos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 60, 40, 26));
 
         try {
             txtdni1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-#####")));
@@ -207,15 +214,44 @@ public class frmAgregarMedico extends javax.swing.JFrame {
         jLabel10.setText("Especialidad:");
         pdatos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 90, 27));
 
-        txtespecialidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(txtespecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 200, -1));
-
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("N:°. Colegiación");
-        pdatos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 110, 27));
+        pdatos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 100, 27));
 
         txtcolegiacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pdatos.add(txtcolegiacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 220, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("*");
+        pdatos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, 10));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("*");
+        pdatos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, 10));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setText("*");
+        pdatos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, 10));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel15.setText("*");
+        pdatos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, 10));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setText("*");
+        pdatos.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, 10));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setText("*");
+        pdatos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, -1, 10));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setText("*");
+        pdatos.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 10, 10));
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir una Opción:", "Medico General", "Odontologia", "Psicologia", "Cirujano", "Ginecologo" }));
+        pdatos.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 190, 30));
 
         jPanel3.add(pdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 24, 656, 251));
 
@@ -286,12 +322,22 @@ public class frmAgregarMedico extends javax.swing.JFrame {
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
-        if (txtdni1.getText().isEmpty() || txtnombre.getText().isEmpty() || txtdireccion.getText().isEmpty() || txtcelular.getText().isEmpty() 
-                || txtcorreo.getText().isEmpty() || txtespecialidad.getText().isEmpty() || txtcolegiacion.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Faltan datos por ingresar, revisar que todos los campos se encuentren llenos en el formulario.");
-        }
-        else{
-            String sql_insert="insert into Medicos (DNI, Nombre, Direccion, Celular, Correo, Especialidad, No_Colegiacion) values ('"+txtdni1.getText().toString()+"',upper('"+ txtnombre.getText().toString() +"'),upper('"+ txtdireccion.getText().toString() +"'), '"+ txtcelular.getText().toString() +"',lower('"+ txtcorreo.getText().toString() +"'),upper('"+ txtespecialidad.getText().toString() +"'),'"+ txtcolegiacion.getText().toString() +"')";
+        String dni = txtdni1.getText().trim();
+        String celular = txtcelular.getText().trim();
+        if(dni.length() < 15){
+            JOptionPane.showMessageDialog(this, "Falta ingresar el DNI del médico.");
+        }else if(txtnombre.getText().isEmpty() || txtdireccion.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "falta ingresar el nombre o dirección del médico.");
+        }else if(celular.length() < 9){
+            JOptionPane.showMessageDialog(this, "Falta ingresar el celular del médico");
+        }else if(txtcorreo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "falta ingresar el correo del médico.");
+        }else if(jComboBox1.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Falta ingresar la especialidad del médico.");
+        }else if(txtcolegiacion.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "falta ingresar el número de colegiación del médico.");
+        }else{
+            String sql_insert="insert into Medicos (DNI, Nombre, Direccion, Celular, Correo, Especialidad, No_Colegiacion) values ('"+txtdni1.getText().toString()+"',upper('"+ txtnombre.getText().toString() +"'),upper('"+ txtdireccion.getText().toString() +"'), '"+ txtcelular.getText().toString() +"',lower('"+ txtcorreo.getText().toString() +"'),upper('"+ jComboBox1.getSelectedItem() +"'),'"+ txtcolegiacion.getText().toString() +"')";
             cc.conectar();
             cc.insertar(sql_insert);
             cc.cerrar();
@@ -338,9 +384,17 @@ public class frmAgregarMedico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -359,7 +413,6 @@ public class frmAgregarMedico extends javax.swing.JFrame {
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JFormattedTextField txtdni1;
-    private javax.swing.JTextField txtespecialidad;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables

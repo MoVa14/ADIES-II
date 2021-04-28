@@ -10,6 +10,7 @@ import Clases.cFechayHora;
 
 import Clases.ConexionDB;
 import java.sql.ResultSet;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -28,33 +29,31 @@ public class frmPaciente extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/icono.png")).getImage());
         this.lblfecha.setText(cFechayHora.fecha());
         txtidpaciente.setText(String.valueOf(auto_increment()));
-        
+
     }
-    
-    
+
     ConexionDB cc = new ConexionDB();
     cFechayHora fecha = new cFechayHora();
-    
-    public int auto_increment(){
+
+    public int auto_increment() {
         String sql_sel = "select max(ID_PX) from Pacientes";
         ResultSet result = null;
         cc.conectar();
         result = cc.seleccionar(sql_sel);
-        int id_px=0;
+        int id_px = 0;
         try {
-            while (result.next()){
+            while (result.next()) {
                 id_px = result.getInt(1);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "el error: "+e.toString());
+            JOptionPane.showMessageDialog(null, "el error: " + e.toString());
             //System.out.println(e.toString());
         }
         cc.cerrar();
-        return ((id_px)+1);
+        return ((id_px) + 1);
     }
-    
-    
-    public void limpiar(){
+
+    public void limpiar() {
         txtidpaciente.setText(String.valueOf(auto_increment()));
         txtdnipx.setText("");
         txtnombrespx.setText("");
@@ -62,8 +61,11 @@ public class frmPaciente extends javax.swing.JFrame {
         txtdireccionpx.setText("");
         txtcelularpx.setText("");
         txtcorreopx.setText("");
-        txtpais.setText("");
         txtanotaciones.setText("");
+        cboxestadocivil.setSelectedIndex(0);
+        cboxpais.setSelectedIndex(0);
+        cboxsexo.setSelectedIndex(0);
+        cboxtsangre.setSelectedIndex(0);
     }
 
     /**
@@ -101,18 +103,31 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         lblfecha = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtpais = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         cboxtsangre = new javax.swing.JComboBox<>();
         txtcelularpx = new javax.swing.JFormattedTextField();
         txtdnipx = new javax.swing.JFormattedTextField();
         calendariofn = new com.toedter.calendar.JDateChooser();
+        cboxpais = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
         pdatosclinicos = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtanotaciones = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         pguardar = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         phpaciente = new javax.swing.JPanel();
@@ -177,7 +192,7 @@ public class frmPaciente extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("DNI");
-        pdatos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, 60, -1));
+        pdatos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, 40, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Nombres");
@@ -231,16 +246,16 @@ public class frmPaciente extends javax.swing.JFrame {
         pdatos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 194, -1, -1));
 
         cboxestadocivil.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cboxestadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casado(a)", "Divorciado(a)", "Soltero(a)", "Union Libre", "Viudo(a)" }));
-        pdatos.add(cboxestadocivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 191, 145, -1));
+        cboxestadocivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir una Opción:", "Casado(a)", "Divorciado(a)", "Soltero(a)", "Union Libre", "Viudo(a)" }));
+        pdatos.add(cboxestadocivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Sexo");
-        pdatos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 194, -1, -1));
+        pdatos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, 30));
 
         cboxsexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cboxsexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino" }));
-        pdatos.add(cboxsexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 191, 179, -1));
+        cboxsexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir una Opción:", "Femenino", "Masculino" }));
+        pdatos.add(cboxsexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 160, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Fecha");
@@ -255,19 +270,16 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel13.setText("País de Nacimiento");
         pdatos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 235, -1, -1));
 
-        txtpais.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        pdatos.add(txtpais, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 232, 241, -1));
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Fecha de Nacimiento");
         pdatos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 235, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel15.setText("Tipo de Sangre");
-        pdatos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 194, 100, -1));
+        pdatos.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 194, 110, -1));
 
         cboxtsangre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cboxtsangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A +", "A -", "B +", "B -", "O +", "O -", "AB +", "AB -" }));
+        cboxtsangre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir una Opción:", "A +", "A -", "B +", "B -", "O +", "O -", "AB +", "AB -" }));
         pdatos.add(cboxtsangre, new org.netbeans.lib.awtextra.AbsoluteConstraints(603, 191, 140, -1));
 
         try {
@@ -292,6 +304,58 @@ public class frmPaciente extends javax.swing.JFrame {
         calendariofn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pdatos.add(calendariofn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 200, 30));
 
+        cboxpais.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cboxpais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir una Opción:", "Honduras", " " }));
+        pdatos.add(cboxpais, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 230, 30));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("*");
+        pdatos.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel23.setText("*");
+        pdatos.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel24.setText("*");
+        pdatos.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setText("*");
+        pdatos.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel26.setText("*");
+        pdatos.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel27.setText("*");
+        pdatos.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel28.setText("*");
+        pdatos.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, -1, -1));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel29.setText("*");
+        pdatos.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, -1, -1));
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel30.setText("*");
+        pdatos.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, -1));
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel31.setText("*");
+        pdatos.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel32.setText("*");
+        pdatos.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));
+
+        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel33.setText("*");
+        pdatos.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, -1, -1));
+
         pprincipal.add(pdatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 770, 280));
 
         pdatosclinicos.setBackground(new java.awt.Color(247, 247, 247));
@@ -309,6 +373,9 @@ public class frmPaciente extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setText("Favor mencionar si el paciente presenta enfermedades sitémicas y mencionar cuáles");
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel22.setText("*");
+
         javax.swing.GroupLayout pdatosclinicosLayout = new javax.swing.GroupLayout(pdatosclinicos);
         pdatosclinicos.setLayout(pdatosclinicosLayout);
         pdatosclinicosLayout.setHorizontalGroup(
@@ -319,7 +386,10 @@ public class frmPaciente extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(pdatosclinicosLayout.createSequentialGroup()
                         .addGroup(pdatosclinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pdatosclinicosLayout.createSequentialGroup()
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel22))
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 128, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -328,7 +398,9 @@ public class frmPaciente extends javax.swing.JFrame {
             pdatosclinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pdatosclinicosLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jLabel16)
+                .addGroup(pdatosclinicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -412,7 +484,7 @@ public class frmPaciente extends javax.swing.JFrame {
 
     private void psalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseExited
         // TODO add your handling code here:
-        psalir.setBackground(new Color(133,156,206));
+        psalir.setBackground(new Color(133, 156, 206));
     }//GEN-LAST:event_psalirMouseExited
 
     private void psalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseClicked
@@ -430,41 +502,63 @@ public class frmPaciente extends javax.swing.JFrame {
 
     private void pguardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseEntered
         // TODO add your handling code here:
-        pguardar.setBackground(new Color(51,204,51));
+        pguardar.setBackground(new Color(51, 204, 51));
     }//GEN-LAST:event_pguardarMouseEntered
 
     private void pguardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseExited
         // TODO add your handling code here:
-        pguardar.setBackground(new Color(247,247,247));
+        pguardar.setBackground(new Color(247, 247, 247));
     }//GEN-LAST:event_pguardarMouseExited
 
     private void phpacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phpacienteMouseEntered
         // TODO add your handling code here:
-        phpaciente.setBackground(new Color(243,106,54));
+        phpaciente.setBackground(new Color(243, 106, 54));
     }//GEN-LAST:event_phpacienteMouseEntered
 
     private void phpacienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phpacienteMouseExited
         // TODO add your handling code here:
-        phpaciente.setBackground(new Color(247,247,247));
+        phpaciente.setBackground(new Color(247, 247, 247));
     }//GEN-LAST:event_phpacienteMouseExited
 
     private void pguardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pguardarMouseClicked
         // TODO add your handling code here:
-       if (txtdnipx.getText().isEmpty() || txtnombrespx.getText().isEmpty() || txtapellidospx.getText().isEmpty() ||
-           txtdireccionpx.getText().isEmpty() || txtcelularpx.getText().isEmpty() || txtpais.getText().isEmpty()  ||txtanotaciones.getText().isEmpty()){
-           
-           JOptionPane.showMessageDialog(null, "Faltan Datos por Ingresar, Revisar Formulario");
-       }
-       else{
-           cc.conectar();
-           String sql_insert = "insert into Pacientes (No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) values('" + txtdnipx.getText() + "',upper('" + txtnombrespx.getText() + "'),upper('" + txtapellidospx.getText() + "'),upper('" + txtdireccionpx.getText() + "'),'" + txtcelularpx.getText() + "',lower('" + txtcorreopx.getText() + "'),upper('" + cboxestadocivil.getSelectedItem() + "'),upper('" + cboxsexo.getSelectedItem() + "'),'" + cboxtsangre.getSelectedItem() + "',upper('" + txtpais.getText() + "'),'" + fecha.ffecha(calendariofn)+ "',upper('" + txtanotaciones.getText() + "'),'" + lblfecha.getText() + "')";
-           cc.insertar(sql_insert);
-           cc.cerrar();
-           limpiar();
-           JOptionPane.showMessageDialog(null, "Se ha registrado el paciente con éxito.");
-       }
-       
-       
+        String dni = txtdnipx.getText().trim();
+        String celular = txtcelularpx.getText().trim();
+        Date dato = calendariofn.getDate();
+        if( dni.length() < 15){
+            JOptionPane.showMessageDialog(this, "Faltan ingresar el DNI del paciente.");
+        }else if (txtnombrespx.getText().isEmpty()
+                || txtapellidospx.getText().isEmpty()
+                || txtdireccionpx.getText().isEmpty()){
+
+            JOptionPane.showMessageDialog(null, "Faltan Datos por Ingresar, Revisar campos de nombres, apellidos, dirección del paciente.");
+        }else if(celular.length() < 9){
+            JOptionPane.showMessageDialog(this, "Falta ingresar el celular del paciente.");
+        }else if(cboxestadocivil.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Falta seleccionar el estado civil del paciente.");
+        }else if(cboxsexo.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Falta seleccionar el sexo del paciente.");
+        }else if(cboxtsangre.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Falta Seleccionar el tipo de sangre del paciente.");
+        }else if(cboxpais.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Falta seleccionar el país de nacimiento del paciente.");
+        }else if(dato == null){
+            JOptionPane.showMessageDialog(this, "Falta ingresar la fecha de nacimiento del paciente.");
+        }else if(txtanotaciones.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Falta ingresar las anotaciones clínicas del paciente.");
+        }else {
+            cc.conectar();
+            String sql_insert = "insert into Pacientes "
+                    + "(No_DNIPX, Nombres_PX, Apellidos_PX, Direccion_PX, Celular_PX, Correo_PX, EstadoCivil_PX, Sexo_PX, TSangre_PX, PNacimiento_PX, FNacimiento_PX, AnotacionesC_PX, FRegistro_PX) "
+                    + "values"
+                    + "('" + txtdnipx.getText() + "',upper('" + txtnombrespx.getText() + "'),upper('" + txtapellidospx.getText() + "'),upper('" + txtdireccionpx.getText() + "'),'" + txtcelularpx.getText() + "',lower('" + txtcorreopx.getText() + "'),upper('" + cboxestadocivil.getSelectedItem() + "'),upper('" + cboxsexo.getSelectedItem() + "'),'" + cboxtsangre.getSelectedItem() + "',upper('" + cboxpais.getSelectedItem() + "'),'" + fecha.ffecha(calendariofn) + "',upper('" + txtanotaciones.getText() + "'),'" + lblfecha.getText() + "')";
+            cc.insertar(sql_insert);
+            cc.cerrar();
+            limpiar();
+            JOptionPane.showMessageDialog(null, "Se ha registrado el paciente con éxito.");
+        }
+
+
     }//GEN-LAST:event_pguardarMouseClicked
 
     private void phpacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phpacienteMouseClicked
@@ -511,11 +605,13 @@ public class frmPaciente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser calendariofn;
     private javax.swing.JComboBox<String> cboxestadocivil;
+    private javax.swing.JComboBox<String> cboxpais;
     private javax.swing.JComboBox<String> cboxsexo;
     private javax.swing.JComboBox<String> cboxtsangre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -526,7 +622,19 @@ public class frmPaciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -550,6 +658,5 @@ public class frmPaciente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtdnipx;
     private javax.swing.JTextField txtidpaciente;
     private javax.swing.JTextField txtnombrespx;
-    private javax.swing.JTextField txtpais;
     // End of variables declaration//GEN-END:variables
 }

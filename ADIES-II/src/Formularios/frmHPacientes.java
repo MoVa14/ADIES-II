@@ -255,6 +255,7 @@ public class frmHPacientes extends javax.swing.JFrame {
 
     private void pactualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pactualizarMouseClicked
         // TODO add your handling code here:
+        model.setRowCount(0);
         String sql_sel="select  No_DNIPX, Nombres_PX, Apellidos_PX, Celular_PX, Sexo_PX, TSangre_PX, FNacimiento_PX from Pacientes order by Nombres_PX";
         ResultSet result = null;
         cc.conectar();

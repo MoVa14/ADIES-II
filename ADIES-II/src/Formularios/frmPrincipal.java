@@ -336,7 +336,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void psalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_psalirMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_psalirMouseClicked
 
     private void pcerrarsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcerrarsMouseEntered
